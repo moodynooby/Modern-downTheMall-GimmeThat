@@ -1,7 +1,6 @@
 {
-  "name": "dtalite",
+  "name": "modern-downthemall",
   "version": "4.0.0",
-  "description": "DownThemAll! lite",
   "main": "main.js",
   "directories": {
     "lib": "lib"
@@ -9,15 +8,15 @@
   "scripts": {
     "build": "util/build.py",
     "build:cleanup": "rm -rf bundles",
-    "build:bundles": "webpack",
+    "build:bundles": "w ebpack",
     "build:regexps": "node util/makexregexps.js > data/xregexps.json",
     "stats": "cloc --vcs=git --exclude-lang=Markdown,SVG",
     "test": "LANG=en mocha -r ts-node/register -r chai/register-expect.js tests",
     "watch": "webpack --watch",
-    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../dtalite.p --keep-profile-changes"
+    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc --keep-profile-changes"
   },
-  "author": "Nils Maier",
-  "license": "MIT",
+  "author": "Manas Doshi",
+  "license": "MPL-2.0",
   "devDependencies": {
     "@types/node": "^12.7.8",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
@@ -37,7 +36,9 @@
     "@types/whatwg-mimetype": "^3.0.0",
     "localforage": "^1.9.0",
     "psl": "^1.4.0",
+    "web-ext": "^8.5.0",
     "webextension-polyfill": "^0.10.0",
     "whatwg-mimetype": "^3.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
