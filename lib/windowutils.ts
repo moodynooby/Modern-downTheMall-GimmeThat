@@ -11,10 +11,7 @@ import { WindowStateTracker } from "./windowstatetracker";
 import { Port, Bus } from "./bus";
 import { timeout } from "./util";
 
-const DONATE_URL = "https://www.downthemall.org/howto/donate/";
-const DONATE_LANG_URLS = Object.freeze(new Map([
-  ["de", "https://www.downthemall.org/howto/donate/spenden/"],
-]));
+
 const MANAGER_URL = "/windows/manager.html";
 
 export async function mostRecentBrowser(incognito: boolean): Promise<any> {
@@ -87,10 +84,6 @@ export async function maybeOpenInTab(url: string, incognito: boolean) {
   await openInTab(url, incognito);
 }
 
-export async function donate() {
-  const url = DONATE_LANG_URLS.get(_("language_code")) || DONATE_URL;
-  await openInTab(url, false);
-}
 
 export async function openPrefs() {
   await runtime.openOptionsPage();

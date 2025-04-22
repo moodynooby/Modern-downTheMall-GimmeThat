@@ -820,11 +820,7 @@ addEventListener("DOMContentLoaded", function dom() {
 
   localize(document.documentElement);
 
-  $("#donate").addEventListener("click", () => {
-    PORT.postMessage({
-      msg: "donate",
-    });
-  });
+ 
   $("#statusPrefs").addEventListener("click", () => {
     PORT.postMessage({
       msg: "prefs",

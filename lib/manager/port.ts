@@ -1,7 +1,7 @@
 "use strict";
 // License: MIT
 
-import { donate, openPrefs } from "../windowutils";
+import {  openPrefs } from "../windowutils";
 import { API } from "../api";
 // eslint-disable-next-line no-unused-vars
 import { BaseDownload } from "./basedownload";
@@ -38,9 +38,7 @@ export class ManagerPort {
       this.port.post("active", active);
     });
 
-    port.on("donate", () => {
-      donate();
-    });
+
     port.on("prefs", () => {
       openPrefs();
     });

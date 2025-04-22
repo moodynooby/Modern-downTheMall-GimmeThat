@@ -5,7 +5,6 @@
 import { Bus, Port } from "./bus";
 import { WindowStateTracker } from "./windowstatetracker";
 import { Promised, timeout } from "./util";
-import { donate } from "./windowutils";
 import { windows, CHROME } from "./browser";
 // eslint-disable-next-line no-unused-vars
 import { BaseItem } from "./item";
@@ -51,9 +50,7 @@ export async function single(item: BaseItem | null) {
       done.reject(new Error("User canceled"));
     });
 
-    port.on("donate", () => {
-      donate();
-    });
+
 
     if (item) {
       port.post("item", {item});

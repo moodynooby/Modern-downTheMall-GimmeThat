@@ -5,7 +5,6 @@
 import { Bus, Port } from "./bus";
 import { Prefs } from "./prefs";
 import { Promised, timeout } from "./util";
-import { donate, openPrefs, openUrls } from "./windowutils";
 // eslint-disable-next-line no-unused-vars
 import { filters, FAST, Filter } from "./filters";
 import { WindowStateTracker } from "./windowstatetracker";
@@ -186,17 +185,6 @@ export async function select(links: BaseItem[], media: BaseItem[]) {
     port.on("onlyfast", ({fast}) => {
       onlyFast = fast;
       sendFilters(true);
-    });
-
-    port.on("donate", () => {
-      donate();
-    });
-    port.on("prefs", () => {
-      openPrefs();
-    });
-
-    port.on("openUrls", ({urls, incognito}) => {
-      openUrls(urls, incognito);
     });
 
     try {
