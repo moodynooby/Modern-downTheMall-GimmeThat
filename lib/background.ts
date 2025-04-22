@@ -584,7 +584,6 @@ locale.then(() => {
       case "manager":
         icons = {
           16: "/style/button-manager.png",
-          32: "/style/button-manager@2x.png",
         };
         break;
       }

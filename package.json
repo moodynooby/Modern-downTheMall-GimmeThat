@@ -1,5 +1,5 @@
 {
-  "name": "modern-downthemall",
+  "name": "modern-link-downloader-fork-of-downloadthemall",
   "version": "4.0.0",
   "main": "main.js",
   "directories": {
@@ -16,7 +16,7 @@
     "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc --keep-profile-changes"
   },
   "author": "Manas Doshi",
-  "license": "MPL-2.0",
+  "license": "GPL-2.0",
   "devDependencies": {
     "@types/node": "^12.7.8",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
