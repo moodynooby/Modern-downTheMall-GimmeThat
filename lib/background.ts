@@ -188,91 +188,53 @@ locale.then(() => {
       menuCreate({
         id: "DTARegularLink",
         contexts: ["link"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta.regular.link"),
       });
       menuCreate({
         id: "DTATurboLink",
         contexts: ["link"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
         title: _("dta.turbo.link"),
       });
       menuCreate({
         id: "DTARegularImage",
         contexts: ["image"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta.regular.image"),
       });
       menuCreate({
         id: "DTATurboImage",
         contexts: ["image"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
         title: _("dta.turbo.image"),
       });
       menuCreate({
         id: "DTARegularMedia",
         contexts: ["video", "audio"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta.regular.media"),
       });
       menuCreate({
         id: "DTATurboMedia",
         contexts: ["video", "audio"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
+
         title: _("dta.turbo.media"),
       });
       menuCreate({
         id: "DTARegularSelection",
         contexts: ["selection"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta.regular.selection"),
       });
       menuCreate({
         id: "DTATurboSelection",
         contexts: ["selection"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
+     
         title: _("dta.turbo.selection"),
       });
       menuCreate({
         id: "DTARegular",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta.regular"),
       });
       menuCreate({
         id: "DTATurbo",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
         title: _("dta.turbo"),
       });
       menuCreate({
@@ -283,19 +245,11 @@ locale.then(() => {
       menuCreate({
         id: "DTARegularAll",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        },
         title: _("dta-regular-all"),
       });
       menuCreate({
         id: "DTATurboAll",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        },
         title: _("dta-turbo-all"),
       });
       const sep2ctx = menus.ACTION_MENU_TOP_LEVEL_LIMIT === 6 ?
@@ -309,12 +263,7 @@ locale.then(() => {
       menuCreate({
         id: "DTAAdd",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/add.svg",
-          32: "/style/add.svg",
-          64: "/style/add.svg",
-          128: "/style/add.svg",
-        },
+      
         title: _("add-download"),
       });
       menuCreate({
@@ -325,21 +274,11 @@ locale.then(() => {
       menuCreate({
         id: "DTAManager",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/button-manager.png",
-          32: "/style/button-manager@2x.png",
-        },
         title: _("manager.short"),
       });
       menuCreate({
         id: "DTAPrefs",
         contexts: ["all", "browser_action", "tools_menu"],
-        icons: {
-          16: "/style/settings.svg",
-          32: "/style/settings.svg",
-          64: "/style/settings.svg",
-          128: "/style/settings.svg",
-        },
         title: _("prefs.short"),
       });
       Object.freeze(alls);
@@ -568,23 +507,12 @@ locale.then(() => {
         break;
 
       case "dta":
-        icons = {
-          16: "/style/button-regular.png",
-          32: "/style/button-regular@2x.png",
-        };
         break;
 
       case "turbo":
-        icons = {
-          16: "/style/button-turbo.png",
-          32: "/style/button-turbo@2x.png",
-        };
         break;
 
       case "manager":
-        icons = {
-          16: "/style/button-manager.png",
-        };
         break;
       }
       action.setIcon({path: icons});
