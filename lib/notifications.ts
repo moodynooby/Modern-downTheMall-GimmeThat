@@ -8,7 +8,7 @@ import {EventEmitter} from "./events";
 const DEFAULTS = {
   type: "basic",
   iconUrl: runtime.getURL("/style/icon64.png"),
-  title: "DownThemAll!",
+  title: "GimmeThat!",
   message: "message",
 };
 
@@ -25,7 +25,7 @@ export class Notification extends EventEmitter {
     super();
 
     this.generated = !id;
-    id = id || `DownThemAll-notification${++gid}`;
+    id = id || `GimmeThat-notification${++gid}`;
     if (typeof options === "string") {
       options = {message: options};
     }

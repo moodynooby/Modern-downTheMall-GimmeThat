@@ -17,6 +17,6 @@ locale.then(() => {
     ["PAGEDOWN", _("key-pagedown")],
     ["HOME", _("key-home")],
     ["END", _("key-end")],
-    ["SHIFT", "⇧"],
+    ["SHIFT", "⬆️"],
   ].forEach(([k, v]) => Keys.set(k, v));
 });

@@ -119,6 +119,6 @@ FASTFILTER.init().catch(console.error);
 
 export const SUBFOLDER = new RecentList("subfolder", [
   "",
-  "downthemall",
+  "GimmeThat",
 ]);
 SUBFOLDER.init().catch(console.error);
