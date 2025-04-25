@@ -1,7 +1,6 @@
 /* eslint-disable no-magic-numbers */
 "use strict";
 // License: MIT
-
 import { PrefWatcher } from "../lib/prefs";
 import { theme } from "../lib/browser";
 import { memoize } from "../lib/memoize";
@@ -108,5 +107,6 @@ export const THEME = new class Theme extends PrefWatcher {
 
   recalculate() {
     document.documentElement.classList[this.dark ? "add" : "remove"]("dark");
+    document.documentElement.setAttribute("data-bs-theme", this.dark ? "dark" : "light");
   }
 }();

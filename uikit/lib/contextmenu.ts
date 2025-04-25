@@ -36,7 +36,6 @@ export interface MenuPosition {
 interface MenuOptions {
   disabled?: string;
   allowClick?: string;
-  icon?: string;
   key?: string;
   autoHide?: string;
 }
@@ -48,7 +47,6 @@ export class MenuItemBase {
 
   public readonly text: string;
 
-  public readonly icon: string;
 
   public readonly key: string;
 
@@ -56,7 +54,6 @@ export class MenuItemBase {
 
   public readonly elem: HTMLLIElement;
 
-  public readonly iconElem: HTMLSpanElement;
 
   public readonly textElem: HTMLSpanElement;
 
@@ -69,30 +66,19 @@ export class MenuItemBase {
     }
     this.id = id;
     this.text = text || "";
-    this.icon = options.icon || "";
     this.key = options.key || "";
     this.autoHide = options.autoHide !== "false";
 
     this.elem = document.createElement("li");
     this.elem.id = this.id;
-    this.iconElem = document.createElement("span");
     this.textElem = document.createElement("span");
     this.keyElem = document.createElement("span");
-    this.elem.appendChild(this.iconElem);
     this.elem.appendChild(this.textElem);
     this.elem.appendChild(this.keyElem);
   }
 
   materialize() {
     this.elem.classList.add("context-menu-item");
-    this.iconElem.className = "context-menu-icon";
-    if (this.icon) {
-      this.iconElem.classList.add(...this.icon.split(" "));
-    }
-    else {
-      this.iconElem.classList.add("context-menu-no-icon");
-    }
-
     this.textElem.textContent = this.text;
     this.textElem.className = "context-menu-text";
 
