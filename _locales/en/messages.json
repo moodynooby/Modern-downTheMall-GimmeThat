@@ -257,27 +257,27 @@
   },
   "dta_regular": {
     "description": "Regular dta action; Menu text",
-    "message": "DownThemAll!"
+    "message": "GimmeThat!"
   },
   "dta_regular_all": {
     "description": "Menu text",
-    "message": "DownThemAll! - All Tabs"
+    "message": "GimmeThat! - All Tabs"
   },
   "dta_regular_image": {
     "description": "Menu text",
-    "message": "Save Image with DownThemAll!"
+    "message": "Save Image with GimmeThat!"
   },
   "dta_regular_link": {
     "description": "Menu text",
-    "message": "Save Link with DownThemAll!"
+    "message": "Save Link with GimmeThat!"
   },
   "dta_regular_media": {
     "description": "Menu text",
-    "message": "Save Media with DownThemAll!"
+    "message": "Save Media with GimmeThat!"
   },
   "dta_regular_selection": {
     "description": "Menu text",
-    "message": "Save Selection with DownThemAll!"
+    "message": "Save Selection with GimmeThat!"
   },
   "dta_turbo": {
     "description": "OneClick! action; Menu text",
@@ -348,7 +348,7 @@
     "message": "Export As Text"
   },
   "extensionDescription": {
-    "description": "DownThemAll! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one",
+    "description": "GimmeThat! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one",
     "message": "The Mass Downloader for your browser"
   },
   "fastfilter_placeholder": {
@@ -483,7 +483,7 @@
   },
   "manager_title": {
     "description": "Window/tab title",
-    "message": "DownThemAll! Manager"
+    "message": "GimmeThat! Manager"
   },
   "mask": {
     "description": "Renaming mask (short); used in e.g. select",
@@ -519,7 +519,7 @@
   },
   "nagging_message": {
     "description": "Donation nagging message; displayed as a notification bar in manager",
-    "message": "You've added $DOWNLOADS$ downloads with DownThemAll! so far! As a regular user you might want to consider a donation to support further development. Thanks!",
+    "message": "You've added $DOWNLOADS$ downloads with GimmeThat! so far! As a regular user you might want to consider a donation to support further development. Thanks!",
     "placeholders": {
       "downloads": {
         "content": "$1",
@@ -591,11 +591,11 @@
   },
   "pref_button_type": {
     "description": "label",
-    "message": "DownThemAll! button:"
+    "message": "GimmeThat! button:"
   },
   "pref_button_type_dta": {
     "description": "label",
-    "message": "DownThemAll! selection"
+    "message": "GimmeThat! selection"
   },
   "pref_button_type_manager": {
     "description": "label",
@@ -703,7 +703,7 @@
   },
   "prefs_title": {
     "description": "Window/tab title; Preferences",
-    "message": "DownThemAll! Preferences"
+    "message": "GimmeThat! Preferences"
   },
   "queue_finished": {
     "description": "Notification text",
@@ -1059,7 +1059,7 @@
   },
   "select_title": {
     "description": "Title of the select window",
-    "message": "DownThemAll! - Select your Downloads"
+    "message": "GimmeThat! - Select your Downloads"
   },
   "set_mask": {
     "description": "Menu text; select window",
@@ -1087,7 +1087,7 @@
   },
   "single_title": {
     "description": "Title of single window",
-    "message": "DownThemAll! - Add a link"
+    "message": "GimmeThat! - Add a link"
   },
   "sizeB": {
     "description": "Size formatting; bytes",

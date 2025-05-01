@@ -1,7 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "GimmeThat",
+  "name": "GimmeThat!",
   "version": "2",
+
+  "description": "__MSG_extensionDescription__",
+  "author": "Manas",
+
   "default_locale": "en",
 
   "content_security_policy": "script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data: blob: 'self'; connect-src data: blob: http: https: 'self'; default-src 'self'",
@@ -41,11 +45,11 @@
     "browser_style": true,
     "default_popup": "windows/popup.html",
     "default_icon": {
-      "32": "style/icon32.png",
-      "64": "style/icon64.png",
-      "128": "style/icon128.png"
+      "32": "/style/icon32.png",
+      "64": "/style/icon64.png",
+      "128": "/style/icon128.png"
     },
-    "default_title": "GimmeThat forked down them all!"
+    "default_title": "GimmeThat!"
   },
 
   "options_ui": {
@@ -55,7 +59,7 @@
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "dwe3432435352434t34g",
+      "id": "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}",
       "strict_min_version": "67.0"
     }
   }

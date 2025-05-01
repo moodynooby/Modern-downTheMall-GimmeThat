@@ -1,6 +1,6 @@
 {
-  "name": "gimmethat-fork-of-downloadthemall",
-  "version": "4.0.0",
+  "name": "gimmethat",
+  "version": "2.0.0",
   "main": "main.js",
   "directories": {
     "lib": "lib"

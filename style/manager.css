@@ -1,6 +1,7 @@
+/* License: gpl-v2 */
+
 @import 'common.css';
 @import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 body {
   display: grid;

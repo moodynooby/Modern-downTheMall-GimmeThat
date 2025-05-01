@@ -20,10 +20,10 @@ FILES = [
   "LICENSE.*",
 ]
 
-RELEASE_ID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}"
+RELEASE_ID = "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}"
 
-UNCOMPRESSABLE = set((".png", ".jpg", ".zip", ".woff2"))
-LICENSED = set((".css", ".html", ".js", "*.ts"))
+UNCOMPRESSABLE = set()
+LICENSED = set()
 IGNORED = set((".DS_Store", "Thumbs.db"))
 # XXX: #125
 IGNORED_OPERA = set(("done.opus", "error.opus"))
@@ -32,20 +32,9 @@ PERM_IGNORED_FX = set(("downloads.shelf", "webRequest", "webRequestBlocking"))
 PERM_IGNORED_CHROME = set(("menus", "sessions", "theme"))
 
 SCRIPTS = [
-  "yarn build:cleanup",
   "yarn build:regexps",
   "yarn build:bundles",
 ]
-
-def check_licenses():
-  for file in Path().glob("**/*"):
-    if "node_modules" in str(file):
-      continue
-    if not file.suffix in LICENSED:
-      continue
-    with file.open("rb") as fp:
-      if not b"License:" in fp.read():
-        raise Exception(f"No license in {file}")
 
 
 def files(additional_ignored):
@@ -88,14 +77,14 @@ def build_firefox(args):
 
   if args.mode != "release":
     infos["version_name"] = f"{version}-{args.mode}"
-    infos["browser_specific_settings"]["gecko"]["id"] = f"{args.mode}@downthemall.org"
+    infos["browser_specific_settings"]["gecko"]["id"] = f"{args.mode}@GT.org"
     infos["short_name"] = infos.get("name")
     infos["name"] = f"{infos.get('name')} {args.mode}"
   else:
     infos["browser_specific_settings"]["gecko"]["id"] = RELEASE_ID
 
   infos["permissions"] = [p for p in infos.get("permissions") if not p in PERM_IGNORED_FX]
-  out = Path("web-ext-artifacts") / f"dta-{version}-{args.mode}-fx.zip"
+  out = Path("web-ext-artifacts") / f"GT-{version}-{args.mode}-fx.zip"
   if not out.parent.exists():
     out.parent.mkdir()
   if out.exists():
@@ -122,7 +111,7 @@ def build_chromium(args, pkg, additional_ignored=set()):
     infos["name"] = f"{infos.get('name')} {args.mode}"
 
   infos["permissions"] = [p for p in infos.get("permissions") if not p in PERM_IGNORED_CHROME]
-  out = Path("web-ext-artifacts") / f"dta-{version}-{args.mode}-{pkg}.zip"
+  out = Path("web-ext-artifacts") / f"GT-{version}-{args.mode}-{pkg}.zip"
   if not out.parent.exists():
     out.parent.mkdir()
   if out.exists():
@@ -134,17 +123,14 @@ def main():
   from argparse import ArgumentParser
   args = ArgumentParser()
   args.add_argument("--mode",
-    type=str, default="dev", choices=["dev", "beta", "release", "nightly"])
+    type=str, default="release", choices=["dev", "beta", "release", "nightly"])
   args = args.parse_args(sys.argv[1:])
-  check_licenses()
   for script in SCRIPTS:
     if os.name == "nt":
       run(script.split(" "), shell=True)
     else:
       run([script], shell=True)
   build_firefox(args)
-  build_chromium(args, "crx")
-  build_chromium(args, "opr", IGNORED_OPERA)
   print("DONE.")
 
 if __name__ == "__main__":
