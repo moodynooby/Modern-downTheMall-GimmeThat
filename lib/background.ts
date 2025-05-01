@@ -475,7 +475,7 @@ locale.then(() => {
       switch (type) {
       case "popup":
         icons = {
-          32: "/style/icon.png",
+          32: "style/icon.png",
         };
         break;
 
