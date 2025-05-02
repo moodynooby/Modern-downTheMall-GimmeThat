@@ -7,14 +7,14 @@
   },
   "scripts": {
     "build": "util/build.py",
-    "build:cleanup": "rm -rf bundles",
+    "build:cleanup": "rimraf bundles",
     "build:bundles": "webpack",
     "build:regexps": "node util/makexregexps.js > data/xregexps.json",
     "stats": "cloc --vcs=git --exclude-lang=Markdown,SVG",
     "test": "LANG=en mocha -r ts-node/register -r chai/register-expect.js tests",
     "watch": "webpack --watch",
-    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc --keep-profile-changes"
-  },
+    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../GT.p --keep-profile-changes"
+    },
   "author": "Manas Doshi",
   "license": "GPL-2.0",
   "devDependencies": {

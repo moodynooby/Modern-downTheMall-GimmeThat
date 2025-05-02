@@ -18,11 +18,11 @@ FILES = [
   "windows/*.html",
   "Readme.*",
   "LICENSE.*",
-]
+  ]
 
 RELEASE_ID = "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}"
 
-UNCOMPRESSABLE = set()
+UNCOMPRESSABLE = set((".png", ".jpg", ".zip", ".woff2"))
 LICENSED = set()
 IGNORED = set((".DS_Store", "Thumbs.db"))
 # XXX: #125
@@ -32,6 +32,7 @@ PERM_IGNORED_FX = set(("downloads.shelf", "webRequest", "webRequestBlocking"))
 PERM_IGNORED_CHROME = set(("menus", "sessions", "theme"))
 
 SCRIPTS = [
+  "yarn build:cleanup",
   "yarn build:regexps",
   "yarn build:bundles",
 ]

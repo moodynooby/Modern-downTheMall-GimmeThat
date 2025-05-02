@@ -471,23 +471,13 @@ locale.then(() => {
       action.setPopup({
         popup: type !== "popup" ? "" : "/windows/popup.html"
       });
-      let icons;
-      switch (type) {
-      case "popup":
-        icons = {
-          32: "style/icon.png",
-        };
-        break;
-
-      case "dta":
-        break;
-
-      case "turbo":
-        break;
-
-      case "manager":
-        break;
-      }
+      let icons = {
+        "16": "style/icon16.png",
+        "32": "style/icon32.png",
+        "64": "style/icon64.png",
+        "128": "style/icon128.png"
+      };
+    
       action.setIcon({path: icons});
     }
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GimmeThat!",
-  "version": "2.2",
+  "version": "2.2.2",
 
   "description": "__MSG_extensionDescription__",
   "author": "Manas",
@@ -55,7 +55,7 @@
 
   "options_ui": {
     "open_in_tab": true,
-    "page": "/windows/prefs.html"
+    "page": "windows/prefs.html"
   },
 
   "browser_specific_settings": {
