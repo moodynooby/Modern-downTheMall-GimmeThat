@@ -19,8 +19,6 @@ article {
 
 #tabs {
   display: flex;
-  background: url(icon64.png) 1em 50%/32px 32px no-repeat,
-    var(--tile-url) repeat-x, var(--toolbar-bg-color);
   padding-left: calc(2em + 32px);
   color: var(--general-bgcolor);
 }
@@ -52,13 +50,14 @@ input.tab {
   display: grid;
 }
 
-#tabsel-general:checked ~ #tabs #tabel-general,
-#tabsel-filters:checked ~ #tabs #tabel-filters,
-#tabsel-network:checked ~ #tabs #tabel-network {
+#tabsel-manager:checked ~ #tab-manager {
+  display: flex;
+}
+
+#tabsel-manager:checked ~ #tabs #tabel-manager {
   color: var(--general-color) !important;
   background: var(--general-bgcolor);
-  border-top: var(--toolbar-border-width) solid
-    var(--toolbar-active-border-color);
+  border-top: var(--toolbar-border-width) solid var(--toolbar-active-border-color);
 }
 
 #tabs > label {

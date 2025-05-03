@@ -105,7 +105,7 @@
   },
   "change_later_reminder": {
     "description": "Checkbox label text for decision confirmations",
-    "message": "You can later change this decision in the Preferences"
+    "message": "You can later change this decision in the Manager"
   },
   "check_selected_items": {
     "description": "Menu text",
@@ -360,7 +360,7 @@
     "message": "Fast Filtering"
   },
   "filter_at_least_one": {
-    "description": "Error message when no filter types are selected for a filter in the preferences UI",
+    "description": "Error message when no filter types are selected for a filter in the Manager UI",
     "message": "You must select at least one filter type!"
   },
   "filter_create_title": {
@@ -698,12 +698,12 @@
     "message": "When a file exists"
   },
   "prefs_short": {
-    "description": "Menu text; Preferences",
-    "message": "Preferences"
+    "description": "Menu text; Manager",
+    "message": "Manager"
   },
   "prefs_title": {
-    "description": "Window/tab title; Preferences",
-    "message": "GimmeThat! Preferences"
+    "description": "Window/tab title; Manager",
+    "message": "GimmeThat! Manager"
   },
   "queue_finished": {
     "description": "Notification text",

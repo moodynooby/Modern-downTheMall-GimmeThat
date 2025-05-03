@@ -4,6 +4,9 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
   <style>
     @import url("/uikit/css/virtualtable.css");
     @import url("/uikit/css/modal.css");
@@ -14,9 +17,23 @@
     .tab {
       display: none;
     }
-
+    
+    /* Style for iframe container */
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+    }
+    
+    /* Style for the iframe itself */
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      overflow: auto;
+    }
   </style>
-  <title data-i18n="prefs.title">Preferences</title>
+  <title data-i18n="prefs.title">Manager</title>
   <link rel="icon" href="/style/icon.svg">
   <script defer src="/bundles/common.js"></script>
   <script defer src="/bundles/prefs.js"></script>
@@ -27,11 +44,13 @@
   <input class="tab" type="radio" id="tabsel-general" name="tabs" checked>
   <input class="tab" type="radio" id="tabsel-filters" name="tabs">
   <input class="tab" type="radio" id="tabsel-network" name="tabs">
+  <input class="tab" type="radio" id="tabsel-manager" name="tabs">
 
   <nav id="tabs" aria-role="tablist">
     <label id="tabel-general" for="tabsel-general" data-i18n="options-general">General</label>
     <label id="tabel-filters" for="tabsel-filters" data-i18n="options-filters">Filters</label>
     <label id="tabel-network" for="tabsel-network" data-i18n="options-network">Network</label>
+    <label id="tabel-manager" for="tabsel-manager">Downloads Manager</label>
   </nav>
 
   <article id="tab-general" class="tab">
@@ -169,7 +188,14 @@
       </div>
     </fieldset>
   </article>
+  <!-- New Manager tab with iframe -->
+  <article id="tab-manager" class="tab">
+    <div class="iframe-container">
+      <iframe src="./manager.html" title="Download Manager" allowfullscreen></iframe>
+    </div>
+  </article>
 
+  <!-- Existing templates -->
   <template id="create-filter-template">
     <h1 data-i18n="filter-create.title"></h1>
     <div id="filter-create">
