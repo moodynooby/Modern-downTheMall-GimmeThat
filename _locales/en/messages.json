@@ -457,7 +457,7 @@
   },
   "manager_short": {
     "description": "Menu text",
-    "message": "Manager"
+    "message": "Download Manager"
   },
   "manager_status_items": {
     "description": "Status bar text; manager",

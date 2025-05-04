@@ -245,11 +245,6 @@ locale.then(() => {
         type: "separator"
       });
       menuCreate({
-        id: "DTAManager",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("manager.short"),
-      });
-      menuCreate({
         id: "DTAPrefs",
         contexts: ["all", "browser_action", "tools_menu"],
         title: _("prefs.short"),

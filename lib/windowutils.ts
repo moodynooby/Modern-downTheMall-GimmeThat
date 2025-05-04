@@ -12,8 +12,7 @@ import { Port, Bus } from "./bus";
 import { timeout } from "./util";
 
 
-const MANAGER_URL = "/windows/manager.html";
-const PREFS_URL = "/windows/prefs.html";
+const MANAGER_URL = "/windows/prefs.html";
 
 export async function mostRecentBrowser(incognito: boolean): Promise<any> {
   let window;
