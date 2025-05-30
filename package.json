@@ -34,7 +34,6 @@
   "dependencies": {
     "@types/psl": "^1.1.0",
     "@types/whatwg-mimetype": "^3.0.0",
-    "bootstrap": "5.3.5",
     "localforage": "^1.9.0",
     "psl": "^1.4.0",
     "web-ext": "^8.5.0",

@@ -1,5 +1,3 @@
-
-
 ## Development
 
 ### Requirements
@@ -26,9 +24,9 @@ Please note: You have to run `yarn watch` or `yarn build` (at least once) as it 
 
 I recommend you install the [`web-ext`](https://www.npmjs.com/package/web-ext) tools from mozilla. It is not listed as a dependency by design at it causes problems with dependency resolution in yarn right now if installed in the same location as the rest of the dependencies.
 
-If you did, then running `yarn webext` (additionally to `yarn watch`) will run the WebExtension in a development profile. This will use the directory `../dtalite.p` to keep a development profile. You might need to create this directory before you use this command. Furthermore `yarn webext` will watch for changes to the sources and automatically reload the extension.
-  
-Alternatively, you can also `yarn build`, which then builds an *unsigned* zip that you can then install permanently in a browser that does not enforce signing (i.e. Nightly or the Unbranded Firefox with the right about:config preferences).
+If you did, then running `yarn webext` (additionally to `yarn watch`) will run the WebExtension in a development profile. This will use the directory `../GT.p` to keep a development profile. You might need to create this directory before you use this command. Furthermore `yarn webext` will watch for changes to the sources and automatically reload the extension.
+
+Alternatively, you can also `yarn build`, which then builds an _unsigned_ zip that you can then install permanently in a browser that does not enforce signing (i.e. Nightly or the Unbranded Firefox with the right about:config preferences).
 
 ### Running in Chrome/Chromium/etc
 
@@ -50,9 +48,9 @@ The output is located in `web-ext-artifacts`.
 
 ### The AMO Editors tl;dr guide
 
-  1. Install the requirements.
-  2. `yarn && python3 util/build.py --mode=release`
-  3. Have a look in `web-ext-artifacts/dta-*-fx.zip`
+1. Install the requirements.
+2. `yarn && python3 util/build.py --mode=release`
+3. Have a look in `web-ext-artifacts/dta-*-fx.zip`
 
 ### Patches
 
