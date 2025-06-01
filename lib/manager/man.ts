@@ -16,7 +16,7 @@ import { Download } from "./download";
 import { ManagerPort } from "./port";
 import { Scheduler } from "./scheduler";
 import { Limits } from "./limits";
-import { downloads, runtime, webRequest, CHROME, OPERA } from "../browser";
+import { downloads, runtime, webRequest, CHROME } from "../browser";
 
 const US = runtime.getURL("");
 
@@ -27,9 +27,11 @@ const MISSING_TIMEOUT = 12 * 1000;
 const RELOAD_TIMEOUT = 10 * 1000;
 const FINISH_NOTIFICATION_PAUSE = 10 * 1000;
 
-const setShelfEnabled = downloads.setShelfEnabled || function() {
-  // ignored
-};
+const setShelfEnabled =
+  downloads.setShelfEnabled ||
+  function () {
+    // ignored
+  };
 
 const FINISH_NOTIFICATION = new PrefWatcher("finish-notification", true);
 const SOUNDS = new PrefWatcher("sounds", false);
@@ -76,9 +78,13 @@ export class Manager extends EventEmitter {
     this.notifiedFinished = true;
     this.items = [];
     this.saveQueue = new CoalescedUpdate(
-      AUTOSAVE_TIMEOUT, this.save.bind(this));
+      AUTOSAVE_TIMEOUT,
+      this.save.bind(this)
+    );
     this.dirty = new CoalescedUpdate(
-      DIRTY_TIMEOUT, this.processDirty.bind(this));
+      DIRTY_TIMEOUT,
+      this.processDirty.bind(this)
+    );
     this.processDeadlines = this.processDeadlines.bind(this);
     this.sids = new Map();
     this.manIds = new Map();
@@ -108,7 +114,7 @@ export class Manager extends EventEmitter {
     if (CHROME) {
       webRequest.onBeforeSendHeaders.addListener(
         this.stuffReferrer.bind(this),
-        {urls: ["<all_urls>"]},
+        { urls: ["<all_urls>"] },
         ["blocking", "requestHeaders", "extraHeaders"]
       );
     }
@@ -143,15 +149,18 @@ export class Manager extends EventEmitter {
 
   async checkMissing() {
     const serializer = new PromiseSerializer(2);
-    const missing = await Promise.all(this.items.map(
-      item => serializer.scheduleWithContext(item, item.maybeMissing)));
+    const missing = await Promise.all(
+      this.items.map((item) =>
+        serializer.scheduleWithContext(item, item.maybeMissing)
+      )
+    );
     if (!(await Prefs.get("remove-missing-on-init"))) {
       return;
     }
-    this.remove(filterInSitu(missing, e => !!e));
+    this.remove(filterInSitu(missing, (e) => !!e));
   }
 
-  onChanged(changes: {id: number}) {
+  onChanged(changes: { id: number }) {
     const item = this.manIds.get(changes.id);
     if (!item) {
       return;
@@ -176,11 +185,10 @@ export class Manager extends EventEmitter {
 
     try {
       download.updateFromSuggestion(state);
-    }
-    finally {
+    } finally {
       const suggestion = {
         filename: download.dest.full,
-        conflictAction: download.conflictAction
+        conflictAction: download.conflictAction,
       };
       suggest(suggestion);
     }
@@ -211,8 +219,7 @@ export class Manager extends EventEmitter {
       }
       try {
         await this.startDownload(next);
-      }
-      catch (ex) {
+      } catch (ex) {
         next.changeState(CANCELED);
         next.error = ex.toString();
         console.error(ex.toString(), ex);
@@ -221,9 +228,11 @@ export class Manager extends EventEmitter {
   }
 
   maybeInstallNameListener() {
-    if (this.installedNameListener ||
+    if (
+      this.installedNameListener ||
       !CHROME ||
-      !downloads.onDeterminingFilename) {
+      !downloads.onDeterminingFilename
+    ) {
       return;
     }
     downloads.onDeterminingFilename.addListener(this.onDeterminingFilename);
@@ -248,7 +257,8 @@ export class Manager extends EventEmitter {
 
     if (this.installedNameListener && downloads.onDeterminingFilename) {
       downloads.onDeterminingFilename.removeListener(
-        this.onDeterminingFilename);
+        this.onDeterminingFilename
+      );
       this.installedNameListener = false;
     }
 
@@ -269,16 +279,11 @@ export class Manager extends EventEmitter {
     if (this.notifiedFinished || this.running.size || this.retrying.size) {
       return;
     }
-    if (SOUNDS.value && !OPERA) {
-      const audio = new Audio(runtime.getURL("/style/done.opus"));
-      audio.addEventListener("canplaythrough", () => audio.play());
-      audio.addEventListener("ended", () => document.body.removeChild(audio));
-      audio.addEventListener("error", () => document.body.removeChild(audio));
-      document.body.appendChild(audio);
-    }
     if (FINISH_NOTIFICATION.value) {
-      if (!this.lastFinishNotification ||
-        Date.now() > this.lastFinishNotification + FINISH_NOTIFICATION_PAUSE) {
+      if (
+        !this.lastFinishNotification ||
+        Date.now() > this.lastFinishNotification + FINISH_NOTIFICATION_PAUSE
+      ) {
         new Notification(null, _("queue-finished"));
         this.lastFinishNotification = Date.now();
       }
@@ -298,7 +303,7 @@ export class Manager extends EventEmitter {
     if (!items || !items.length) {
       return;
     }
-    items = items.map(i => {
+    items = items.map((i) => {
       const dl = new Download(this, i);
       dl.position = this.items.push(dl) - 1;
       this.sids.set(dl.sessionId, dl);
@@ -306,11 +311,11 @@ export class Manager extends EventEmitter {
       return dl;
     });
 
-    Prefs.get("nagging", 0).
-      then(v => {
+    Prefs.get("nagging", 0)
+      .then((v) => {
         return Prefs.set("nagging", (v || 0) + items.length);
-      }).
-      catch(console.error);
+      })
+      .catch(console.error);
 
     this.scheduler = null;
     this.save(items);
@@ -326,14 +331,13 @@ export class Manager extends EventEmitter {
   }
 
   processDirty(items: Download[]) {
-    items = items.filter(i => !i.removed);
-    items.forEach(item => this.saveQueue.add(item));
+    items = items.filter((i) => !i.removed);
+    items.forEach((item) => this.saveQueue.add(item));
     this.emit("dirty", items);
   }
 
   private save(items: Download[]) {
-    DB.saveItems(items.filter(i => !i.removed)).
-      catch(console.error);
+    DB.saveItems(items.filter((i) => !i.removed)).catch(console.error);
   }
 
   setPositions() {
@@ -353,7 +357,7 @@ export class Manager extends EventEmitter {
   }
 
   forEach(sids: number[], cb: (item: Download) => void) {
-    sids.forEach(sid => {
+    sids.forEach((sid) => {
       const download = this.sids.get(sid);
       if (!download) {
         return;
@@ -363,40 +367,37 @@ export class Manager extends EventEmitter {
   }
 
   resumeDownloads(sids: number[], forced = false) {
-    this.forEach(sids, download => download.resume(forced));
+    this.forEach(sids, (download) => download.resume(forced));
   }
 
   pauseDownloads(sids: number[]) {
-    this.forEach(sids, download => download.pause());
+    this.forEach(sids, (download) => download.pause());
   }
 
   cancelDownloads(sids: number[]) {
-    this.forEach(sids, download => download.cancel());
+    this.forEach(sids, (download) => download.cancel());
   }
 
   setMissing(sid: number) {
-    this.forEach([sid], download => download.setMissing());
+    this.forEach([sid], (download) => download.setMissing());
   }
 
   changedState(download: Download, oldState: number, newState: number) {
     if (oldState === RUNNING) {
       this.running.delete(download);
-    }
-    else if (oldState === RETRYING) {
+    } else if (oldState === RETRYING) {
       this.retrying.delete(download);
       this.findDeadline();
     }
     if (newState === QUEUED) {
       this.resetScheduler();
       this.startNext().catch(console.error);
-    }
-    else if (newState === RUNNING) {
+    } else if (newState === RUNNING) {
       // Usually we already added it. But if a user uses the built-in
       // download manager to restart
       // a download, we have not, so make sure it is added either way
       this.running.add(download);
-    }
-    else {
+    } else {
       if (newState === RETRYING) {
         this.addRetry(download);
       }
@@ -410,13 +411,15 @@ export class Manager extends EventEmitter {
   }
 
   private findDeadline() {
-    let deadline = Array.from(this.retrying).
-      reduce<number>((deadline, item) => {
+    let deadline = Array.from(this.retrying).reduce<number>(
+      (deadline, item) => {
         if (deadline) {
           return item.deadline ? Math.min(deadline, item.deadline) : deadline;
         }
         return item.deadline;
-      }, 0);
+      },
+      0
+    );
     if (deadline <= 0) {
       return;
     }
@@ -435,14 +438,13 @@ export class Manager extends EventEmitter {
     this.deadlineTimer = 0;
     try {
       const now = Date.now();
-      this.items.forEach(item => {
+      this.items.forEach((item) => {
         if (item.deadline && Math.abs(item.deadline - now) < 1000) {
           this.retrying.delete(item);
           item.resume(false);
         }
       });
-    }
-    finally {
+    } finally {
       this.findDeadline();
     }
   }
@@ -451,22 +453,26 @@ export class Manager extends EventEmitter {
     try {
       // Construct new items
       const currentSids = new Map(this.sids);
-      let items = mapFilterInSitu(sids, sid => {
-        const item = currentSids.get(sid);
-        if (!item) {
-          return null;
-        }
-        currentSids.delete(sid);
-        return item;
-      }, e => !!e);
+      let items = mapFilterInSitu(
+        sids,
+        (sid) => {
+          const item = currentSids.get(sid);
+          if (!item) {
+            return null;
+          }
+          currentSids.delete(sid);
+          return item;
+        },
+        (e) => !!e
+      );
       if (currentSids.size) {
         items = items.concat(
-          sort(Array.from(currentSids.values()), i => i.position));
+          sort(Array.from(currentSids.values()), (i) => i.position)
+        );
       }
       this.items = items;
       this.setPositions();
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error("sorted", "sids", sids, "ex", ex.message, ex);
     }
   }
@@ -475,7 +481,7 @@ export class Manager extends EventEmitter {
     if (!items.length) {
       return;
     }
-    items.forEach(item => {
+    items.forEach((item) => {
       item.removed = true;
       if (!item.manId) {
         return;
@@ -483,20 +489,26 @@ export class Manager extends EventEmitter {
       this.removeManId(item.manId);
       item.cancel();
     });
-    DB.deleteItems(items).then(() => {
-      const sids = items.map(item => item.sessionId);
-      sids.forEach(sid => this.sids.delete(sid));
-      sort(items.map(item => item.position)).
-        reverse().
-        forEach(idx => this.items.splice(idx, 1));
-      this.emit("removed", sids);
-      this.setPositions();
-      this.resetScheduler();
-    }).catch(console.error);
+    DB.deleteItems(items)
+      .then(() => {
+        const sids = items.map((item) => item.sessionId);
+        sids.forEach((sid) => this.sids.delete(sid));
+        sort(items.map((item) => item.position))
+          .reverse()
+          .forEach((idx) => this.items.splice(idx, 1));
+        this.emit("removed", sids);
+        this.setPositions();
+        this.resetScheduler();
+      })
+      .catch(console.error);
   }
 
   removeBySids(sids: number[]) {
-    const items = mapFilterInSitu(sids, sid => this.sids.get(sid), e => !!e);
+    const items = mapFilterInSitu(
+      sids,
+      (sid) => this.sids.get(sid),
+      (e) => !!e
+    );
     return this.remove(items);
   }
 
@@ -509,7 +521,7 @@ export class Manager extends EventEmitter {
   }
 
   getMsgItems() {
-    return this.items.map(e => e.toMsg());
+    return this.items.map((e) => e.toMsg());
   }
 
   stuffReferrer(details: any): any {
@@ -517,7 +529,8 @@ export class Manager extends EventEmitter {
       return undefined;
     }
     const sidx = details.requestHeaders.findIndex(
-      (e: any) => e.name.toLowerCase() === "x-dta-id");
+      (e: any) => e.name.toLowerCase() === "x-dta-id"
+    );
     if (sidx < 0) {
       return undefined;
     }
@@ -529,10 +542,10 @@ export class Manager extends EventEmitter {
     }
     details.requestHeaders.push({
       name: "Referer",
-      value: (item.uReferrer || item.uURL).toString()
+      value: (item.uReferrer || item.uURL).toString(),
     });
     const rv: any = {
-      requestHeaders: details.requestHeaders
+      requestHeaders: details.requestHeaders,
     };
     return rv;
   }

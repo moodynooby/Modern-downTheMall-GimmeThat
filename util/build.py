@@ -17,17 +17,13 @@ FILES = [
   "uikit/css/*",
   "windows/*.html",
   "Readme.*",
-  "LICENSE.*",
   ]
 
 RELEASE_ID = "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}"
 
 UNCOMPRESSABLE = set((".png", ".jpg", ".zip", ".woff2"))
-LICENSED = set()
 IGNORED = set((".DS_Store", "Thumbs.db"))
 # XXX: #125
-IGNORED_OPERA = set(("done.opus", "error.opus"))
-
 PERM_IGNORED_FX = set(("downloads.shelf", "webRequest", "webRequestBlocking"))
 PERM_IGNORED_CHROME = set(("menus", "sessions", "theme"))
 
@@ -54,9 +50,6 @@ def build(out, manifest, additional_ignored=set()):
       else:
         with file.open("rb") as fp:
           buf = fp.read()
-        if file.suffix in LICENSED and not b"License:" in buf:
-          raise Exception(f"No license in {file}")
-
       zinfo = ZipInfo(str(file), date_time=(2019, 1, 1, 0, 0, 0))
       if file.suffix in UNCOMPRESSABLE:
         zp.writestr(zinfo, buf, compress_type=ZIP_STORED)
@@ -93,7 +86,7 @@ def build_firefox(args):
   print("Output", out)
   build(out, json.dumps(infos, indent=2).encode("utf-8"))
 
-  
+
 def build_chromium(args, pkg, additional_ignored=set()):
   now = datetime.now().strftime("%Y%m%d%H%M%S")
   with open("manifest.json") as manip:

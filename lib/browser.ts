@@ -16,7 +16,6 @@ export interface MessageSender {
   readonly tlsChannelId?: string;
 }
 
-
 export interface Tab {
   readonly id?: number;
   readonly incognito?: boolean;
@@ -28,7 +27,6 @@ export interface MenuClickInfo {
   readonly linkUrl?: string;
   readonly srcUrl?: string;
 }
-
 
 export interface RawPort {
   readonly error: any;
@@ -49,11 +47,11 @@ interface WebRequestListener {
     callback: Function,
     filter: WebRequestFilter,
     extraInfoSpec: string[]
-    ): void;
+  ): void;
   removeListener(callback: Function): void;
 }
 
-type Header = {name: string; value: string};
+type Header = { name: string; value: string };
 
 export interface DownloadOptions {
   conflictAction: string;
@@ -100,21 +98,20 @@ export interface OnInstalled {
   readonly temporary: boolean;
 }
 
-export const {browserAction} = polyfill;
-export const {contextMenus} = polyfill;
-export const {downloads}: {downloads: Downloads} = polyfill;
-export const {extension} = polyfill;
-export const {history} = polyfill;
-export const {menus} = polyfill;
-export const {notifications} = polyfill;
-export const {runtime} = polyfill;
-export const {sessions} = polyfill;
-export const {storage} = polyfill;
-export const {tabs} = polyfill;
-export const {webNavigation} = polyfill;
-export const {webRequest}: {webRequest: WebRequest} = polyfill;
-export const {windows} = polyfill;
-export const {theme} = polyfill;
+export const { browserAction } = polyfill;
+export const { contextMenus } = polyfill;
+export const { downloads }: { downloads: Downloads } = polyfill;
+export const { extension } = polyfill;
+export const { history } = polyfill;
+export const { menus } = polyfill;
+export const { notifications } = polyfill;
+export const { runtime } = polyfill;
+export const { sessions } = polyfill;
+export const { storage } = polyfill;
+export const { tabs } = polyfill;
+export const { webNavigation } = polyfill;
+export const { webRequest }: { webRequest: WebRequest } = polyfill;
+export const { windows } = polyfill;
+export const { theme } = polyfill;
 
 export const CHROME = navigator.appVersion.includes("Chrome/");
-export const OPERA = navigator.appVersion.includes("OPR/");
