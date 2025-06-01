@@ -1,4 +1,4 @@
-## Development
+Licensed under the GPL-2.0 License.
 
 ### Requirements
 
