@@ -6,7 +6,7 @@ import {
   ContextMenu,
   MenuItem,
   // eslint-disable-next-line no-unused-vars
-  SubMenuItem
+  SubMenuItem,
 } from "../contextmenu";
 import { iconForPath, openUrls } from "../../lib/windowutils";
 import { formatSpeed, formatSize, formatTimeDelta } from "../../lib/formatters";
@@ -21,16 +21,18 @@ import { Broadcaster } from "../broadcaster";
 import { Icons } from "../icons";
 import { Buttons } from "./buttons";
 import {
-  TextFilter, UrlMenuFilter, StateMenuFilter, SizeMenuFilter,
+  TextFilter,
+  UrlMenuFilter,
+  StateMenuFilter,
+  SizeMenuFilter,
   // eslint-disable-next-line no-unused-vars
-  MenuFilter
+  MenuFilter,
 } from "./itemfilters";
 import { FilteredCollection } from "./itemfilters";
 import { RemovalModalDialog, DeleteFilesDialog } from "./removaldlg";
 import { Stats } from "./stats";
 import PORT from "./port";
 import { DownloadState, StateTexts, StateClasses, StateIcons } from "./state";
-import { Tooltip } from "./tooltip";
 import "../../lib/util";
 import { CellTypes } from "../../uikit/lib/constants";
 import { downloads, CHROME } from "../../lib/browser";
@@ -56,8 +58,8 @@ const COL_SPEED = 6;
 const COL_MASK = 7;
 const COL_SEGS = 8;
 
-const HIDPI = window.matchMedia &&
-  window.matchMedia("(min-resolution: 2dppx)").matches;
+const HIDPI =
+  window.matchMedia && window.matchMedia("(min-resolution: 2dppx)").matches;
 
 const ICON_BASE_SIZE = 16;
 const ICON_REAL_SIZE = !CHROME && HIDPI ? ICON_BASE_SIZE * 2 : ICON_BASE_SIZE;
@@ -69,18 +71,18 @@ const LARGE_ICON_REAL_SIZE = HIDPI ? MAX_ICON_BASE_SIZE : LARGE_ICON_BASE_SIZE;
 
 let TEXT_SIZE_UNKNOWM = "unknown";
 let REAL_STATE_TEXTS = Object.freeze(new Map<number, string>());
-StateTexts.then(v => {
+StateTexts.then((v) => {
   REAL_STATE_TEXTS = v;
 });
 
-const prettyNumber = (function() {
-const rv = new Intl.NumberFormat(undefined, {
-  style: "decimal",
-  useGrouping: true,
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 0
-});
-return rv.format.bind(rv);
+const prettyNumber = (function () {
+  const rv = new Intl.NumberFormat(undefined, {
+    style: "decimal",
+    useGrouping: true,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  return rv.format.bind(rv);
 })();
 
 class ShowUrlsWatcher extends PrefWatcher {
@@ -168,9 +170,10 @@ export class DownloadItem extends EventEmitter {
       return this.iconField;
     }
     this.iconField = this.owner.icons.get(
-      iconForPath(this.currentName, ICON_BASE_SIZE));
+      iconForPath(this.currentName, ICON_BASE_SIZE)
+    );
     if (this.ext) {
-      IconCache.get(this.ext, ICON_REAL_SIZE).then(icon => {
+      IconCache.get(this.ext, ICON_REAL_SIZE).then((icon) => {
         if (icon) {
           this.iconField = this.owner.icons.get(icon);
           if (typeof this.filteredPosition !== undefined) {
@@ -187,9 +190,10 @@ export class DownloadItem extends EventEmitter {
       return this.largeIconField;
     }
     this.largeIconField = this.owner.icons.get(
-      iconForPath(this.currentName, LARGE_ICON_BASE_SIZE));
+      iconForPath(this.currentName, LARGE_ICON_BASE_SIZE)
+    );
     if (this.ext) {
-      IconCache.get(this.ext, LARGE_ICON_REAL_SIZE).then(icon => {
+      IconCache.get(this.ext, LARGE_ICON_REAL_SIZE).then((icon) => {
         if (icon) {
           this.largeIconField = this.owner.icons.get(icon);
         }
@@ -200,7 +204,7 @@ export class DownloadItem extends EventEmitter {
   }
 
   get eta() {
-    const {avg} = this.stats;
+    const { avg } = this.stats;
     if (!this.totalSize || !avg) {
       return TEXT_SIZE_UNKNOWM;
     }
@@ -237,8 +241,11 @@ export class DownloadItem extends EventEmitter {
       if (!this.totalSize) {
         return formatSize(this.written);
       }
-      return _("size-progress",
-        formatSize(this.written), formatSize(this.totalSize));
+      return _(
+        "size-progress",
+        formatSize(this.written),
+        formatSize(this.totalSize)
+      );
     }
     if (!this.totalSize) {
       return TEXT_SIZE_UNKNOWM;
@@ -267,9 +274,9 @@ export class DownloadItem extends EventEmitter {
   }
 
   get fmtSpeed() {
-    return this.state === DownloadState.RUNNING ?
-      formatSpeed(this.stats.avg) :
-      "";
+    return this.state === DownloadState.RUNNING
+      ? formatSpeed(this.stats.avg)
+      : "";
   }
 
   get fmtDomain() {
@@ -277,12 +284,12 @@ export class DownloadItem extends EventEmitter {
   }
 
   updateDownload(raw: any) {
-    if (("position" in raw) && raw.position !== this.position) {
+    if ("position" in raw && raw.position !== this.position) {
       console.warn("position mismatch", raw.position, this.position);
       PORT.post("all");
       return;
     }
-    if (("ext" in raw) && raw.ext !== this.ext) {
+    if ("ext" in raw && raw.ext !== this.ext) {
       this.clearIcons();
     }
     delete raw.position;
@@ -301,16 +308,12 @@ export class DownloadItem extends EventEmitter {
   }
 
   async queryState() {
-    const [state] = await downloads.search({id: this.manId});
+    const [state] = await downloads.search({ id: this.manId });
     return state;
   }
 
   adoptSize(state: any) {
-    const {
-      bytesReceived,
-      totalBytes,
-      fileSize
-    } = state;
+    const { bytesReceived, totalBytes, fileSize } = state;
     this.written = Math.max(0, bytesReceived);
     this.totalSize = Math.max(0, fileSize >= 0 ? fileSize : totalBytes);
   }
@@ -350,8 +353,7 @@ export class DownloadItem extends EventEmitter {
         v = Math.max(0, this.written - this.lastWritten);
         this.lastWritten = Math.max(0, this.written);
       }
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error("failed to stat", ex);
     }
     this.stats.add(v);
@@ -382,7 +384,6 @@ export class DownloadItem extends EventEmitter {
     }
   }
 }
-
 
 export class DownloadTable extends VirtualTable {
   private finished: number;
@@ -433,8 +434,6 @@ export class DownloadTable extends VirtualTable {
 
   private readonly disableSet: Set<Broadcaster>;
 
-  private tooltip: Tooltip | null;
-
   constructor(treeConfig: TableConfig | null) {
     super("#items", treeConfig, TREE_CONFIG_VERSION);
 
@@ -453,7 +452,9 @@ export class DownloadTable extends VirtualTable {
     this.downloads.on("changed", () => this.updateCounts());
     this.downloads.on("added", () => this.updateCounts());
     this.downloads.on("sorted", () => {
-      PORT.post("sorted", {sids: this.downloads.items.map(i => i.sessionId)});
+      PORT.post("sorted", {
+        sids: this.downloads.items.map((i) => i.sessionId),
+      });
     });
 
     this.updateCounts();
@@ -466,16 +467,17 @@ export class DownloadTable extends VirtualTable {
     ]);
     this.on("column-clicked", (id, evt, col) => {
       const mf = menufilters.get(id);
-      const {left, bottom} = col.elem.getBoundingClientRect();
+      const { left, bottom } = col.elem.getBoundingClientRect();
       if (!mf) {
         return undefined;
       }
-      mf.show({clientX: left, clientY: bottom});
+      mf.show({ clientX: left, clientY: bottom });
       return true;
     });
-    const filterforColumn = new Map(Array.from(
-      menufilters.entries()).map(([col, f]) => [f.id, col]));
-    this.downloads.on("filter-active", filter => {
+    const filterforColumn = new Map(
+      Array.from(menufilters.entries()).map(([col, f]) => [f.id, col])
+    );
+    this.downloads.on("filter-active", (filter) => {
       const name = filterforColumn.get(filter);
       if (!name) {
         return;
@@ -486,7 +488,7 @@ export class DownloadTable extends VirtualTable {
       }
       col.iconElem.classList.add("icon-filter");
     });
-    this.downloads.on("filter-inactive", filter => {
+    this.downloads.on("filter-inactive", (filter) => {
       const name = filterforColumn.get(filter);
       if (!name) {
         return;
@@ -503,7 +505,7 @@ export class DownloadTable extends VirtualTable {
     this.sids = new Map<number, DownloadItem>();
     this.icons = new Icons($("#icons"));
 
-    const ctx = this.contextMenu = new ContextMenu("#table-context");
+    const ctx = (this.contextMenu = new ContextMenu("#table-context"));
     Keys.adoptContext(ctx);
     Keys.adoptButtons($("#toolbar"));
 
@@ -553,14 +555,16 @@ export class DownloadTable extends VirtualTable {
     });
 
     ctx.on("ctx-remove-all", () => this.removeAllDownloads());
-    ctx.on("ctx-remove-complete-all",
-      () => this.removeCompleteDownloads(false));
-    ctx.on("ctx-remove-complete-selected",
-      () => this.removeCompleteDownloads(true));
-    ctx.on("ctx-remove-domain",
-      () => this.removeDomainDownloads(false));
-    ctx.on("ctx-remove-complete-domain",
-      () => this.removeDomainDownloads(true));
+    ctx.on("ctx-remove-complete-all", () =>
+      this.removeCompleteDownloads(false)
+    );
+    ctx.on("ctx-remove-complete-selected", () =>
+      this.removeCompleteDownloads(true)
+    );
+    ctx.on("ctx-remove-domain", () => this.removeDomainDownloads(false));
+    ctx.on("ctx-remove-complete-domain", () =>
+      this.removeDomainDownloads(true)
+    );
     ctx.on("ctx-remove-failed", () => this.removeFailedDownloads());
     ctx.on("ctx-remove-paused", () => this.removePausedDownloads());
     ctx.on("ctx-remove-batch", () => this.removeBatchDownloads());
@@ -568,8 +572,9 @@ export class DownloadTable extends VirtualTable {
     ctx.on("ctx-import", () => this.importDownloads());
     ctx.on("ctx-export-text", () => this.exportDownloads(imex.textExporter));
     ctx.on("ctx-export-aria2", () => this.exportDownloads(imex.aria2Exporter));
-    ctx.on("ctx-export-metalink",
-      () => this.exportDownloads(imex.metalinkExporter));
+    ctx.on("ctx-export-metalink", () =>
+      this.exportDownloads(imex.metalinkExporter)
+    );
     ctx.on("ctx-export-json", () => this.exportDownloads(imex.jsonExporter));
 
     ctx.on("dismissed", () => this.table.focus());
@@ -579,7 +584,7 @@ export class DownloadTable extends VirtualTable {
       return true;
     });
 
-    ctx.on("clicked", e => this.handleFilterRemove(e));
+    ctx.on("clicked", (e) => this.handleFilterRemove(e));
 
     const toolbar = new Buttons("#toolbar");
     toolbar.on("btn-add", () => PORT.post("showSingle"));
@@ -649,39 +654,10 @@ export class DownloadTable extends VirtualTable {
     ]);
 
     this.on(
-      "selection-changed", debounce(this.selectionChanged.bind(this), 10));
+      "selection-changed",
+      debounce(this.selectionChanged.bind(this), 10)
+    );
     this.selection.clear();
-
-    this.tooltip = null;
-    const tooltipWatcher = new PrefWatcher("tooltip", true);
-    this.on("hover", info => {
-      if (!document.hasFocus()) {
-        return;
-      }
-      if (!tooltipWatcher.value) {
-        return;
-      }
-      const item = this.downloads.filtered[info.rowid];
-      if (!item) {
-        return;
-      }
-      if (this.tooltip) {
-        this.tooltip.dismiss();
-      }
-      this.tooltip = new Tooltip(item, info);
-    });
-    this.on("hover-change", info => {
-      if (!this.tooltip) {
-        return;
-      }
-      this.tooltip.adjust(info);
-    });
-    this.on("hover-done", () => this.dismissTooltip());
-    this.downloads.on("changed", () => this.dismissTooltip());
-    this.contextMenu.on("showing", () => this.dismissTooltip());
-    addEventListener("scroll", () => this.dismissTooltip(), {passive: true});
-    addEventListener("wheel", () => this.dismissTooltip(), {passive: true});
-    addEventListener("keydown", () => this.dismissTooltip(), {passive: true});
   }
 
   get rowCount() {
@@ -689,7 +665,7 @@ export class DownloadTable extends VirtualTable {
   }
 
   updateCounts() {
-    const {length: total} = this.downloads.items;
+    const { length: total } = this.downloads.items;
     const fTotal = prettyNumber(total);
     const fFin = prettyNumber(this.finished);
     const fDisp = prettyNumber(this.rowCount);
@@ -699,11 +675,11 @@ export class DownloadTable extends VirtualTable {
       fFin,
       fTotal,
       fDisp,
-      fRunning);
+      fRunning
+    );
     if (total) {
       document.title = `[${fFin}/${fTotal}] - ${_("manager.title")}`;
-    }
-    else {
+    } else {
       document.title = _("manager.title");
     }
   }
@@ -726,30 +702,24 @@ export class DownloadTable extends VirtualTable {
     $("#statusSpeed").textContent = formatSpeed(this.globalStats.avg);
   }
 
-  dismissTooltip() {
-    if (!this.tooltip) {
-      return;
-    }
-    this.tooltip.dismiss();
-    this.tooltip = null;
-  }
-
   async showContextMenu(event: MouseEvent) {
-    const {contextMenu: ctx} = this;
+    const { contextMenu: ctx } = this;
     const filts = await filters();
 
     const prepareMenu = (prefix: string) => {
       const rem = (ctx.get(prefix) as SubMenuItem).menu;
       prefix += "-filter-";
-      Array.from(rem).
-        filter(e => e.startsWith(prefix)).
-        forEach(e => rem.remove(e));
+      Array.from(rem)
+        .filter((e) => e.startsWith(prefix))
+        .forEach((e) => rem.remove(e));
       for (const filt of filts.all) {
         if (typeof filt.id !== "string" || filt.id === "deffilter-all") {
           continue;
         }
         const mi = new MenuItem(rem, `${prefix}-${filt.id}`, filt.label, {
-          icon: this.icons.get(iconForPath(`file.${filt.icon || "bin"}`, ICON_BASE_SIZE))
+          icon: this.icons.get(
+            iconForPath(`file.${filt.icon || "bin"}`, ICON_BASE_SIZE)
+          ),
         });
         rem.add(mi);
       }
@@ -763,32 +733,35 @@ export class DownloadTable extends VirtualTable {
 
   setItems(items: any[]) {
     const savedStats = new Map(
-      Array.from(this.running).map(item => [item.sessionId, item.stats]));
+      Array.from(this.running).map((item) => [item.sessionId, item.stats])
+    );
     this.running.clear();
     this.sids.clear();
-    this.downloads.set(items.map(item => {
-      const rv = new DownloadItem(this, item, savedStats.get(item.sessionId));
-      this.sids.set(rv.sessionId, rv);
-      return rv;
-    }));
+    this.downloads.set(
+      items.map((item) => {
+        const rv = new DownloadItem(this, item, savedStats.get(item.sessionId));
+        this.sids.set(rv.sessionId, rv);
+        return rv;
+      })
+    );
   }
 
   getSelectedItems() {
-    const {filtered} = this.downloads;
-    return Array.from(this.selection).map(e => filtered[e]);
+    const { filtered } = this.downloads;
+    return Array.from(this.selection).map((e) => filtered[e]);
   }
 
   getSelectedSids(allowedStates: number) {
-    const {filtered} = this.downloads;
+    const { filtered } = this.downloads;
     const selected = Array.from(this.selection);
     const allowedItems = selected.filter(
-      i => allowedStates & filtered[i].state);
-    return allowedItems.map(i => filtered[i].sessionId);
+      (i) => allowedStates & filtered[i].state
+    );
+    return allowedItems.map((i) => filtered[i].sessionId);
   }
 
   selectionChanged() {
-    this.dismissTooltip();
-    const {empty} = this.selection;
+    const { empty } = this.selection;
     if (empty) {
       for (const d of this.disableSet) {
         d.disabled = true;
@@ -801,7 +774,7 @@ export class DownloadTable extends VirtualTable {
     }
 
     const items = this.getSelectedItems();
-    const states = items.reduce((p, c) => p |= c.state, 0);
+    const states = items.reduce((p, c) => (p |= c.state), 0);
 
     if (!(states & DownloadState.PAUSEABLE)) {
       this.pauseAction.disabled = true;
@@ -822,9 +795,8 @@ export class DownloadTable extends VirtualTable {
       this.deleteFilesAction.disabled = true;
     }
 
-    const item = this.focusRow >= 0 ?
-      this.downloads.filtered[this.focusRow] :
-      null;
+    const item =
+      this.focusRow >= 0 ? this.downloads.filtered[this.focusRow] : null;
     const canOpen = item && item.manId && item.state === DownloadState.DONE;
     const canOpenDirectory = item && item.manId;
     this.openFileAction.disabled = !canOpen;
@@ -833,11 +805,12 @@ export class DownloadTable extends VirtualTable {
 
   resumeDownloads(forced = false) {
     const sids = this.getSelectedSids(
-      forced ? DownloadState.FORCABLE : DownloadState.RESUMABLE);
+      forced ? DownloadState.FORCABLE : DownloadState.RESUMABLE
+    );
     if (!sids.length) {
       return;
     }
-    PORT.post("resume", {sids, forced});
+    PORT.post("resume", { sids, forced });
   }
 
   pauseDownloads() {
@@ -845,7 +818,7 @@ export class DownloadTable extends VirtualTable {
     if (!sids.length) {
       return;
     }
-    PORT.post("pause", {sids});
+    PORT.post("pause", { sids });
   }
 
   cancelDownloads() {
@@ -853,12 +826,11 @@ export class DownloadTable extends VirtualTable {
     if (!sids.length) {
       return;
     }
-    PORT.post("cancel", {sids});
+    PORT.post("cancel", { sids });
   }
 
   async openFile() {
-    this.dismissTooltip();
-    const {focusRow} = this;
+    const { focusRow } = this;
     if (focusRow < 0) {
       return;
     }
@@ -870,12 +842,10 @@ export class DownloadTable extends VirtualTable {
     try {
       this.invalidateRow(focusRow);
       await downloads.open(item.manId);
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error(ex, ex.toString(), ex);
-      PORT.post("missing", {sid: item.sessionId});
-    }
-    finally {
+      PORT.post("missing", { sid: item.sessionId });
+    } finally {
       setTimeout(() => {
         item.opening = false;
         this.invalidateRow(focusRow);
@@ -893,10 +863,9 @@ export class DownloadTable extends VirtualTable {
     }
     try {
       await downloads.show(item.manId);
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error(ex, ex.toString(), ex);
-      PORT.post("missing", {sid: item.sessionId});
+      PORT.post("missing", { sid: item.sessionId });
     }
   }
 
@@ -911,25 +880,29 @@ export class DownloadTable extends VirtualTable {
     if (!items.length) {
       return;
     }
-    const sids = items.map(i => i.sessionId);
-    const paths = items.map(i => i.destFull);
+    const sids = items.map((i) => i.sessionId);
+    const paths = items.map((i) => i.destFull);
     await new DeleteFilesDialog(paths).show();
-    await Promise.all(items.map(async item => {
-      try {
-        if (item.manId && item.state === DownloadState.DONE) {
-          await downloads.removeFile(item.manId);
+    await Promise.all(
+      items.map(async (item) => {
+        try {
+          if (item.manId && item.state === DownloadState.DONE) {
+            await downloads.removeFile(item.manId);
+          }
+        } catch {
+          // ignored
         }
-      }
-      catch {
-        // ignored
-      }
-    }));
+      })
+    );
     this.removeDownloadsInternal(sids);
   }
 
   copyURL() {
-    if (this.focusRow < 0 || !navigator.clipboard ||
-      !navigator.clipboard.writeText) {
+    if (
+      this.focusRow < 0 ||
+      !navigator.clipboard ||
+      !navigator.clipboard.writeText
+    ) {
       return;
     }
     const item = this.downloads.filtered[this.focusRow];
@@ -962,17 +935,19 @@ export class DownloadTable extends VirtualTable {
     if (!sids.length) {
       return;
     }
-    PORT.post("removeSids", {sids});
+    PORT.post("removeSids", { sids });
   }
 
   removeDownloadsByState(state: number, selectionOnly = false) {
     const branch = selectionOnly ? "filtered" : "items";
-    const items = this.downloads[branch].filter(item => {
-      if (selectionOnly && !this.selection.contains(item.filteredPosition)) {
-        return false;
-      }
-      return item.state === state;
-    }).map(i => i.sessionId);
+    const items = this.downloads[branch]
+      .filter((item) => {
+        if (selectionOnly && !this.selection.contains(item.filteredPosition)) {
+          return false;
+        }
+        return item.state === state;
+      })
+      .map((i) => i.sessionId);
     if (!items.length) {
       return;
     }
@@ -981,24 +956,26 @@ export class DownloadTable extends VirtualTable {
 
   async removeDownloads() {
     await new RemovalModalDialog(
-      _("remove-download.question"), "remove-selected").show();
+      _("remove-download.question"),
+      "remove-selected"
+    ).show();
     this.removeDownloadsInternal();
   }
 
   async removeAllDownloads() {
     await new RemovalModalDialog(
-      _("remove-all-downloads.question"), "remove-selected-all").show();
-    this.removeDownloadsInternal(this.downloads.items.map(e => e.sessionId));
+      _("remove-all-downloads.question"),
+      "remove-selected-all"
+    ).show();
+    this.removeDownloadsInternal(this.downloads.items.map((e) => e.sessionId));
   }
 
   async removeCompleteDownloads(selected = false) {
     await new RemovalModalDialog(
-      selected ?
-        _("remove-selected-complete-downloads.question") :
-        _("remove-complete-downloads.question"),
-      selected ?
-        "remove-selected-complete" :
-        "remove-complete"
+      selected
+        ? _("remove-selected-complete-downloads.question")
+        : _("remove-complete-downloads.question"),
+      selected ? "remove-selected-complete" : "remove-complete"
     ).show();
     this.removeDownloadsByState(DownloadState.DONE, selected);
   }
@@ -1035,22 +1012,22 @@ export class DownloadTable extends VirtualTable {
     if (!item) {
       return;
     }
-    const {domain} = item;
+    const { domain } = item;
     await new RemovalModalDialog(
-      complete ?
-        _("remove-domain-complete-downloads.question", domain) :
-        _("remove-domain-downloads.question", domain),
-      complete ?
-        "remove-domain-complete" :
-        "remove-domain"
+      complete
+        ? _("remove-domain-complete-downloads.question", domain)
+        : _("remove-domain-downloads.question", domain),
+      complete ? "remove-domain-complete" : "remove-domain"
     ).show();
 
-    const items = this.downloads.items.filter(item => {
-      if (complete && item.state !== DownloadState.DONE) {
-        return false;
-      }
-      return item.domain === domain;
-    }).map(i => i.sessionId);
+    const items = this.downloads.items
+      .filter((item) => {
+        if (complete && item.state !== DownloadState.DONE) {
+          return false;
+        }
+        return item.domain === domain;
+      })
+      .map((i) => i.sessionId);
     if (!items.length) {
       return;
     }
@@ -1065,22 +1042,22 @@ export class DownloadTable extends VirtualTable {
     if (!item) {
       return;
     }
-    const {batch} = item;
+    const { batch } = item;
     await new RemovalModalDialog(
-      complete ?
-        _("remove-batch-complete-downloads.question", batch) :
-        _("remove-batch-downloads.question", batch),
-      complete ?
-        "remove-batch-complete" :
-        "remove-batch"
+      complete
+        ? _("remove-batch-complete-downloads.question", batch)
+        : _("remove-batch-downloads.question", batch),
+      complete ? "remove-batch-complete" : "remove-batch"
     ).show();
 
-    const items = this.downloads.items.filter(item => {
-      if (complete && item.state !== DownloadState.DONE) {
-        return false;
-      }
-      return item.batch === batch;
-    }).map(i => i.sessionId);
+    const items = this.downloads.items
+      .filter((item) => {
+        if (complete && item.state !== DownloadState.DONE) {
+          return false;
+        }
+        return item.batch === batch;
+      })
+      .map((i) => i.sessionId);
     if (!items.length) {
       return;
     }
@@ -1095,18 +1072,18 @@ export class DownloadTable extends VirtualTable {
     let all = false;
     let branch;
     switch (prefix) {
-    case "ctx-remove-filter":
-      all = true;
-      branch = "remove-filter-downloads";
-      break;
+      case "ctx-remove-filter":
+        all = true;
+        branch = "remove-filter-downloads";
+        break;
 
-    case "ctx-remove-complete-filter":
-      all = false;
-      branch = "remove-complete-filter-downloads";
-      break;
+      case "ctx-remove-complete-filter":
+        all = false;
+        branch = "remove-complete-filter-downloads";
+        break;
 
-    default:
-      return;
+      default:
+        return;
     }
 
     const filter = (await filters()).get(id);
@@ -1114,14 +1091,18 @@ export class DownloadTable extends VirtualTable {
       return;
     }
     await new RemovalModalDialog(
-      _(`${branch}.question`, filter.label), `${branch}-${filter.id}`).show();
+      _(`${branch}.question`, filter.label),
+      `${branch}-${filter.id}`
+    ).show();
 
-    const items = this.downloads.items.filter(item => {
-      if (!all && item.state !== DownloadState.DONE) {
-        return false;
-      }
-      return filter.match(item.usable);
-    }).map(i => i.sessionId);
+    const items = this.downloads.items
+      .filter((item) => {
+        if (!all && item.state !== DownloadState.DONE) {
+          return false;
+        }
+        return filter.match(item.usable);
+      })
+      .map((i) => i.sessionId);
     if (!items.length) {
       return;
     }
@@ -1154,55 +1135,61 @@ export class DownloadTable extends VirtualTable {
   }
 
   updatedState(
-      item: DownloadItem, oldState: number | undefined, newState: number) {
+    item: DownloadItem,
+    oldState: number | undefined,
+    newState: number
+  ) {
     switch (oldState) {
-    case DownloadState.RUNNING:
-      this.running.delete(item);
-      if (!this.running.size && this.runningTimer && this.sizesTimer) {
-        clearInterval(this.runningTimer);
-        this.runningTimer = null;
-        clearInterval(this.sizesTimer);
-        this.sizesTimer = null;
-        $("#statusSpeedContainer").classList.add("hidden");
-      }
-      break;
+      case DownloadState.RUNNING:
+        this.running.delete(item);
+        if (!this.running.size && this.runningTimer && this.sizesTimer) {
+          clearInterval(this.runningTimer);
+          this.runningTimer = null;
+          clearInterval(this.sizesTimer);
+          this.sizesTimer = null;
+          $("#statusSpeedContainer").classList.add("hidden");
+        }
+        break;
 
-    case DownloadState.DONE:
-      this.finished--;
-      break;
+      case DownloadState.DONE:
+        this.finished--;
+        break;
     }
     switch (newState) {
-    case DownloadState.RUNNING:
-      this.running.add(item);
-      if (!this.runningTimer) {
-        this.runningTimer = window.setInterval(
-          this.updateRunning.bind(this), RUNNING_TIMEOUT);
-        this.sizesTimer = window.setInterval(
-          this.updateSizes.bind(this), SIZES_TIMEOUT);
-        this.updateRunning();
-        this.updateSizes();
-        $("#statusSpeedContainer").classList.remove("hidden");
-      }
-      if (item.manId && item.ext) {
-        IconCache.set(item.ext, item.manId).catch(console.error);
-      }
-      break;
+      case DownloadState.RUNNING:
+        this.running.add(item);
+        if (!this.runningTimer) {
+          this.runningTimer = window.setInterval(
+            this.updateRunning.bind(this),
+            RUNNING_TIMEOUT
+          );
+          this.sizesTimer = window.setInterval(
+            this.updateSizes.bind(this),
+            SIZES_TIMEOUT
+          );
+          this.updateRunning();
+          this.updateSizes();
+          $("#statusSpeedContainer").classList.remove("hidden");
+        }
+        if (item.manId && item.ext) {
+          IconCache.set(item.ext, item.manId).catch(console.error);
+        }
+        break;
 
-    case DownloadState.DONE:
-      this.finished++;
-      if (item.manId && item.ext) {
-        IconCache.set(item.ext, item.manId).catch(console.error);
-      }
-      break;
+      case DownloadState.DONE:
+        this.finished++;
+        if (item.manId && item.ext) {
+          IconCache.set(item.ext, item.manId).catch(console.error);
+        }
+        break;
     }
     this.selectionChanged();
     this.updateCounts();
   }
 
-
   removedItems(sids: number[]) {
     const ssids = new Set(sids);
-    const items = this.downloads.items.filter(i => {
+    const items = this.downloads.items.filter((i) => {
       if (!ssids.has(i.sessionId)) {
         return true;
       }
@@ -1241,7 +1228,7 @@ export class DownloadTable extends VirtualTable {
         if (!items || !items.length) {
           return;
         }
-        PORT.post("import", {items});
+        PORT.post("import", { items });
       };
       reader.readAsText(picker.files[0], "utf-8");
     };
@@ -1256,7 +1243,7 @@ export class DownloadTable extends VirtualTable {
     const text = exporter.getText(items as unknown as BaseItem[]);
     const enc = new TextEncoder();
     const data = enc.encode(text);
-    const url = URL.createObjectURL(new Blob([data], {type: "text/plain"}));
+    const url = URL.createObjectURL(new Blob([data], { type: "text/plain" }));
     const link = document.createElement("a");
     link.setAttribute("href", url);
     link.setAttribute("download", exporter.fileName);
@@ -1282,7 +1269,7 @@ export class DownloadTable extends VirtualTable {
     if (item.opening) {
       return ["opening"];
     }
-    return cls && [cls] || null;
+    return (cls && [cls]) || null;
   }
 
   getCellIcon(rowid: number, colid: number) {
@@ -1312,29 +1299,29 @@ export class DownloadTable extends VirtualTable {
       return "";
     }
     switch (colid) {
-    case COL_URL:
-      return item.fmtName;
+      case COL_URL:
+        return item.fmtName;
 
-    case COL_DOMAIN:
-      return item.fmtDomain;
+      case COL_DOMAIN:
+        return item.fmtDomain;
 
-    case COL_PER:
-      return item.fmtPercent;
+      case COL_PER:
+        return item.fmtPercent;
 
-    case COL_SIZE:
-      return item.fmtSize;
+      case COL_SIZE:
+        return item.fmtSize;
 
-    case COL_ETA:
-      return item.fmtETA;
+      case COL_ETA:
+        return item.fmtETA;
 
-    case COL_SPEED:
-      return item.fmtSpeed;
+      case COL_SPEED:
+        return item.fmtSpeed;
 
-    case COL_SEGS:
-      return ""; // item.fmtSegments;
+      case COL_SEGS:
+        return ""; // item.fmtSegments;
 
-    case COL_MASK:
-      return item.mask;
+      case COL_MASK:
+        return item.mask;
     }
     return "";
   }
@@ -1345,26 +1332,26 @@ export class DownloadTable extends VirtualTable {
       return -1;
     }
     switch (item.state) {
-    case DownloadState.QUEUED:
-      return item.percent;
+      case DownloadState.QUEUED:
+        return item.percent;
 
-    case DownloadState.RUNNING:
-      return item.percent || -1;
+      case DownloadState.RUNNING:
+        return item.percent || -1;
 
-    case DownloadState.PAUSED:
-      return item.percent || -1;
+      case DownloadState.PAUSED:
+        return item.percent || -1;
 
-    case DownloadState.FINISHING:
-      return 1;
+      case DownloadState.FINISHING:
+        return 1;
 
-    case DownloadState.DONE:
-      return 1;
+      case DownloadState.DONE:
+        return 1;
 
-    case DownloadState.CANCELED:
-      return 1;
+      case DownloadState.CANCELED:
+        return 1;
 
-    default:
-      return -1;
+      default:
+        return -1;
     }
   }
 

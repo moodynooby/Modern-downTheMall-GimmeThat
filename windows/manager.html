@@ -1,70 +1,94 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title data-i18n="manager_title">GimmeThat Downloader!</title>
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  
+
   <style>
     @import "/uikit/css/virtualtable.css";
     @import "/uikit/css/modal.css";
     @import "/style/manager.css";
-</style>
+  </style>
   <link rel="icon" href="/style/icon.svg">
   <script defer src="/bundles/common.js"></script>
   <script defer src="/bundles/manager.js"></script>
   <style id="icons">
   </style>
 </head>
-  
+
 <body>
   <section id="toolbar">
     <div class="button" id="btn-add" data-i18n="title=add-download">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-    </svg></div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+      </svg>
+    </div>
     <div class="thin-spacer"></div>
     <div class="button" id="btn-resume" data-i18n="title=resume-download" data-key="ACCEL-KeyR">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
       </svg>
     </div>
     <div class="button" id="btn-pause" data-i18n="title=pause-download" data-key="ACCEL-KeyP">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
-        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5"/>
-      </svg>    </div>
-    <div class="button" id="btn-cancel" data-i18n="title=cancel-download" data-key="ACCEL-KeyC">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause"
+        viewBox="0 0 16 16">
+        <path
+          d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5" />
       </svg>
-        </div>
+    </div>
+    <div class="button" id="btn-cancel" data-i18n="title=cancel-download" data-key="ACCEL-KeyC">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+        viewBox="0 0 16 16">
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+      </svg>
+    </div>
     <div class="thin-spacer"></div>
     <div class="button" id="btn-top" data-i18n="title=move-top" data-key="ALT-Home">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z"/>
-        <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
-      </svg>    </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z" />
+        <path fill-rule="evenodd"
+          d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z" />
+      </svg>
+    </div>
     <div class="button" id="btn-up" data-i18n="title=move-up" data-key="ALT-PageUp">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
-      </svg>    </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+      </svg>
+    </div>
     <div class="button" id="btn-down" data-i18n="title=move-down" data-key="ALT-PageDown">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
       </svg>
     </div>
     <div class="button" id="btn-bottom" data-i18n="title=move-bottom" data-key="ALT-End">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-        <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-      </svg>    </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+        <path fill-rule="evenodd"
+          d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+      </svg>
+    </div>
     <div class="spacer"></div>
     <div class="spacer"></div>
   </section>
   <div id="downloads">
     <div id="loading">
-   LOADING...</div>
+      LOADING...</div>
     <table id="items" data-hover="true">
       <tr>
         <th data-i18n="colNameURL" data-hideable="false" id="colURL"></th>
@@ -84,14 +108,18 @@
 
   <section id="status">
     <div id="statusNetwork">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16">
-        <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049"/>
-        <path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wifi"
+        viewBox="0 0 16 16">
+        <path
+          d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049" />
+        <path
+          d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z" />
       </svg>
     </div>
     <div id="statusFilter">
-    <input type="text" id="filter" data-i18n="placeholder=search"></div>
-    <div span ></span> <span id="statusItems"></span></div>
+      <input type="text" id="filter" data-i18n="placeholder=search">
+    </div>
+    <div span></span> <span id="statusItems"></span></div>
     <div class="hidden" id="statusSpeedContainer"><span id="statusSpeed"></span></div>
     <div id="statusPrefs"></div>
   </section>
@@ -99,35 +127,38 @@
   <template id="table-context">
     <ul id="table-context" class="table-context">
       <li id="ctx-open-file" data-key="Enter" data-i18n="open-file">Open File</li>
-      <li id="ctx-open-directory" data-key="ACCEL-Enter" data-i18n="open-directory" >Open Directory</li>
-      <li id="ctx-delete-files" data-key="ACCEL-Delete" data-i18n="deletefiles" ></li>
+      <li id="ctx-open-directory" data-key="ACCEL-Enter" data-i18n="open-directory">Open Directory</li>
+      <li id="ctx-delete-files" data-key="ACCEL-Delete" data-i18n="deletefiles"></li>
       <li>-</li>
-      <li id="ctx-resume" data-key="ACCEL-KeyR" data-i18n="resume-download" >Resume</li>
-      <li id="ctx-pause" data-key="ACCEL-KeyP" data-i18n="pause-download" >Pause</li>
+      <li id="ctx-resume" data-key="ACCEL-KeyR" data-i18n="resume-download">Resume</li>
+      <li id="ctx-pause" data-key="ACCEL-KeyP" data-i18n="pause-download">Pause</li>
       <li id="ctx-cancel" data-key="ACCEL-KeyC" data-i18n="cancel-download">Cancel</li>
       <li>-</li>
       <li id="ctx-force-download" data-key="ACCEL-SHIFT-KeyR" data-i18n="force-start">Force Start Now</li>
       <li>-</li>
-      <li id="ctx-remove-complete" data-key="SHIFT-Delete" data-i18n="remove-complete-downloads"  data-allow-click="true">Remove Complete
+      <li id="ctx-remove-complete" data-key="SHIFT-Delete" data-i18n="remove-complete-downloads"
+        data-allow-click="true">Remove Complete
         <ul class="table-context">
-          <li id="ctx-remove-complete-all" data-key="SHIFT-Delete"  data-i18n="remove-all-complete-downloads">Remove all complete</li>
-          <li id="ctx-remove-complete-selected"  data-i18n="remove-selected-complete-downloads">Remove selected complete</li>
+          <li id="ctx-remove-complete-all" data-key="SHIFT-Delete" data-i18n="remove-all-complete-downloads">Remove all
+            complete</li>
+          <li id="ctx-remove-complete-selected" data-i18n="remove-selected-complete-downloads">Remove selected complete
+          </li>
           <li>-</li>
-          <li id="ctx-remove-complete-domain"  data-i18n="remove-domain-complete-downloads">Remove selected complete</li>
+          <li id="ctx-remove-complete-domain" data-i18n="remove-domain-complete-downloads">Remove selected complete</li>
           <li>-</li>
         </ul>
       </li>
-      <li id="ctx-remove-missing" data-key="ALT-Delete" data-i18n="remove-missing" >Clear Missing</li>
-      <li id="ctx-remove" data-key="Delete" data-i18n="remove-download"  data-allow-click="true">Remove
+      <li id="ctx-remove-missing" data-key="ALT-Delete" data-i18n="remove-missing">Clear Missing</li>
+      <li id="ctx-remove" data-key="Delete" data-i18n="remove-download" data-allow-click="true">Remove
         <ul class="table-context">
-          <li id="ctx-remove-selected"  data-key="Delete" data-i18n="remove-selected-downloads">Remove Selected</li>
-          <li id="ctx-remove-all"  data-i18n="remove-all-downloads">Remove All</li>
+          <li id="ctx-remove-selected" data-key="Delete" data-i18n="remove-selected-downloads">Remove Selected</li>
+          <li id="ctx-remove-all" data-i18n="remove-all-downloads">Remove All</li>
           <li>-</li>
-          <li id="ctx-remove-domain"  data-i18n="remove-domain-downloads">Remove Domain</li>
+          <li id="ctx-remove-domain" data-i18n="remove-domain-downloads">Remove Domain</li>
           <li id="ctx-remove-batch" data-i18n="remove-batch-downloads">Remove Current Batch</li>
           <li>-</li>
-          <li id="ctx-remove-failed"  data-i18n="remove-failed-downloads">Remove Failed</li>
-          <li id="ctx-remove-paused"  data-i18n="remove-paused-downloads">Remove Paused</li>
+          <li id="ctx-remove-failed" data-i18n="remove-failed-downloads">Remove Failed</li>
+          <li id="ctx-remove-paused" data-i18n="remove-paused-downloads">Remove Paused</li>
           <li>-</li>
         </ul>
       </li>
@@ -138,8 +169,8 @@
       <li id="ctx-copy-url" data-key="ACCEL-KeyU" data-i18n="copy-download-url">Copy Download Link</li>
       <li id="ctx-open-url" data-key="ACCEL-KeyO" data-i18n="open-link">Open Link</li>
       <li>-</li>
-      <li id="ctx-import"  data-i18n="import"></li>
-      <li id="ctx-export"  data-i18n="export">
+      <li id="ctx-import" data-i18n="import"></li>
+      <li id="ctx-export" data-i18n="export">
         <ul class="table-context">
           <li id="ctx-export-text" data-i18n="export-text"></li>
           <li id="ctx-export-aria2" data-i18n="export-aria2"></li>
@@ -149,7 +180,7 @@
       </li>
       <li>-</li>
       <li id="ctx-move-top" data-key="ALT-Home" data-i18n="move-top">Top</li>
-      <li id="ctx-move-up" data-key="ALT-PageUp" data-i18n="move-up" >Up</li>
+      <li id="ctx-move-up" data-key="ALT-PageUp" data-i18n="move-up">Up</li>
       <li id="ctx-move-down" data-key="ALT-PageDown" data-i18n="move-down">down</li>
       <li id="ctx-move-bottom" data-key="ALT-End" data-i18n="move-bottom">Bottom</li>
     </ul>
@@ -159,8 +190,9 @@
     <h1 class="removal-title" data-i18n="remove-downloads.title"></h1>
     <p class="removal-text"></p>
     <p>
-      <div><label><input type="checkbox" name="removal-remember" class="removal-remember"> <span data-i18n="remember"></span></label></div>
-      <div><em data-i18n="change-later-reminder">You can later change it in the Preferences</em></div>
+    <div><label><input type="checkbox" name="removal-remember" class="removal-remember"> <span
+          data-i18n="remember"></span></label></div>
+    <div><em data-i18n="change-later-reminder">You can later change it in the Preferences</em></div>
     </p>
   </template>
 
@@ -181,31 +213,6 @@
     </ul>
   </template>
 
-  <template id="tooltip-template">
-    <div id="tooltip">
-      <div id="tooltip-infos">
-        <div id="tooltip-name"></div>
-        <label data-i18n="tooltip-from"></label>
-        <div id="tooltip-from"></div>
-        <label data-i18n="tooltip-size"></label>
-        <div id="tooltip-size"></div>
-        <label data-i18n="tooltip-date"></label>
-        <div id="tooltip-date"></div>
-        <label data-i18n="tooltip-eta" id="tooltip-etalabel"></label>
-        <div id="tooltip-eta"></div>
-      </div>
-      <div id="tooltip-speedbox">
-        <canvas id="tooltip-speedbar"></canvas>
-        <label data-i18n="tooltip-speed-current"></label>
-        <div id="tooltip-current"></div>
-        <label data-i18n="tooltip-speed-average"></label>
-        <div id="tooltip-average"></div>
-      </div>
-      <div id="tooltip-progressbar">
-        <div id="tooltip-progress"></div>
-      </div>
-    </div>
-  </template>
 </body>
 
 </html>

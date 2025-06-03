@@ -573,7 +573,6 @@ addEventListener("DOMContentLoaded", async () => {
   new BoolPref("pref-finish-notification", "finish-notification");
   // XXX: #125
   new BoolPref("pref-hide-context", "hide-context");
-  new BoolPref("pref-tooltip", "tooltip");
   new BoolPref("pref-open-manager-on-queue", "open-manager-on-queue");
   new BoolPref("pref-text-links", "text-links");
   new BoolPref("pref-add-paused", "add-paused");
