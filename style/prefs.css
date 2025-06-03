@@ -138,7 +138,6 @@ fieldset {
   margin-bottom: 1em;
   border: 1px solid var(--general-border-color);
   border-radius: 6px;
-  box-shadow: 1px 1px 6px var(--general-border-color);
   background: rgba(128, 128, 128, 0.05);
   flex-direction: column;
   max-width: 60em;
@@ -172,7 +171,6 @@ legend {
   border: 1px solid var(--general-border-color);
   border-radius: 6px;
   background: rgba(128, 128, 128, 0.05);
-  box-shadow: 1px 1px 6px var(--general-border-color);
 }
 
 #network-general {
