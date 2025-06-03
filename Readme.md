@@ -5,8 +5,9 @@ Licensed under the GPL-2.0 License.
 V2.6
 Aim to make the extension faster and leaner
 
-- Remove Locales as it was slowing down the extension
-  -Removed ToolTips And Custom Sounds to use native features
+- Remove Locales as it was slowing down the extension and made them optional
+- Made the settings page more modern
+- Removed ToolTips And Custom Sounds to use native features
 
 ### Requirements
 
