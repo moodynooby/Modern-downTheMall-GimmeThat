@@ -34,7 +34,6 @@ const setShelfEnabled =
   };
 
 const FINISH_NOTIFICATION = new PrefWatcher("finish-notification", true);
-const SOUNDS = new PrefWatcher("sounds", false);
 
 export class Manager extends EventEmitter {
   private items: Download[];

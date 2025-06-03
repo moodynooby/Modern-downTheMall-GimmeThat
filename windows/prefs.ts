@@ -11,7 +11,7 @@ import {
 import { Prefs, PrefWatcher } from "../lib/prefs";
 import { hostToDomain } from "../lib/util";
 import { filters } from "../lib/filters";
-import {Limits} from "../lib/manager/limits";
+import { Limits } from "../lib/manager/limits";
 // eslint-disable-next-line no-unused-vars
 import ModalDialog, { ModalButton } from "../uikit/lib/modal";
 import { TYPE_LINK, TYPE_MEDIA } from "../lib/constants";
@@ -23,7 +23,6 @@ import { runtime, storage } from "../lib/browser";
 import "./theme";
 
 const ICON_BASE_SIZE = 16;
-
 
 class UIPref<T extends HTMLElement> extends PrefWatcher {
   id: string;
@@ -87,21 +86,23 @@ class OptionPref extends UIPref<HTMLElement> {
 
   constructor(id: string, pref: string) {
     super(id, pref);
-    this.options = Array.from(this.elem.querySelectorAll<HTMLInputElement>(`*[name='${id}']`));
-    this.options.forEach(o => {
+    this.options = Array.from(
+      this.elem.querySelectorAll<HTMLInputElement>(`*[name='${id}']`)
+    );
+    this.options.forEach((o) => {
       o.addEventListener("change", () => this.change());
     });
   }
 
   change() {
-    const opt = this.options.find(e => e.checked);
+    const opt = this.options.find((e) => e.checked);
     if (opt && opt.value) {
       this.save(opt.value);
     }
   }
 
   changed(prefs: any, key: string, value: any) {
-    const opt = this.options.find(e => e.value === value);
+    const opt = this.options.find((e) => e.value === value);
     if (opt) {
       opt.checked = true;
     }
@@ -119,8 +120,9 @@ class CreateFilterDialog extends ModalDialog {
   media: HTMLInputElement;
 
   getContent() {
-    const rv = $<HTMLTemplateElement>("#create-filter-template").
-      content.cloneNode(true) as DocumentFragment;
+    const rv = $<HTMLTemplateElement>(
+      "#create-filter-template"
+    ).content.cloneNode(true) as DocumentFragment;
     this.label = $("#filter-create-label", rv);
     this.expr = $("#filter-create-expr", rv);
     this.link = $("#filter-create-type-link", rv);
@@ -133,13 +135,13 @@ class CreateFilterDialog extends ModalDialog {
       {
         title: _("create-filter"),
         value: "ok",
-        default: true
+        default: true,
       },
       {
         title: _("cancel"),
         value: "cancel",
-        dismiss: true
-      }
+        dismiss: true,
+      },
     ];
   }
 
@@ -165,23 +167,20 @@ class CreateFilterDialog extends ModalDialog {
     if (!label) {
       valid = false;
       this.label.setCustomValidity(_("cannot-be-empty"));
-    }
-    else {
+    } else {
       this.label.setCustomValidity("");
     }
     if (!expr) {
       valid = false;
       this.expr.setCustomValidity(_("cannot-be-empty"));
-    }
-    else {
+    } else {
       this.expr.setCustomValidity("");
     }
     if (!type) {
       valid = false;
       this.link.setCustomValidity(_("filter-at-least-one"));
       this.media.setCustomValidity(_("filter-at-least-one"));
-    }
-    else {
+    } else {
       this.link.setCustomValidity("");
       this.media.setCustomValidity("");
     }
@@ -189,10 +188,11 @@ class CreateFilterDialog extends ModalDialog {
       return undefined;
     }
 
-    filters().then(async filters => {
-      await filters.create(label, expr, type);
-    }).catch(console.error);
-
+    filters()
+      .then(async (filters) => {
+        await filters.create(label, expr, type);
+      })
+      .catch(console.error);
 
     return super.done(b);
   }
@@ -231,29 +231,42 @@ class FiltersUI extends VirtualTable {
       filter,
       row: filter,
     };
-    this.edit.label.addEventListener("input", () => {
-      if (!this.edit.filter) {
-        return;
-      }
-      if (!this.edit.label.checkValidity() ||
-       this.edit.label.value.length <= 0) {
-        return;
-      }
-      this.edit.filter.label = this.edit.label.value;
-      this.ignoreNext = true;
-      this.saveFilter(this.edit.filter, this.edit.row);
-    }, true);
-    this.edit.expr.addEventListener("input", () => {
-      if (!this.edit.filter) {
-        return;
-      }
-      if (!this.edit.expr.checkValidity() || this.edit.expr.value.length <= 0) {
-        return;
-      }
-      this.edit.filter.expr = this.edit.expr.value;
-      this.ignoreNext = true;
-      this.saveFilter(this.edit.filter, this.edit.row);
-    }, true);
+    this.edit.label.addEventListener(
+      "input",
+      () => {
+        if (!this.edit.filter) {
+          return;
+        }
+        if (
+          !this.edit.label.checkValidity() ||
+          this.edit.label.value.length <= 0
+        ) {
+          return;
+        }
+        this.edit.filter.label = this.edit.label.value;
+        this.ignoreNext = true;
+        this.saveFilter(this.edit.filter, this.edit.row);
+      },
+      true
+    );
+    this.edit.expr.addEventListener(
+      "input",
+      () => {
+        if (!this.edit.filter) {
+          return;
+        }
+        if (
+          !this.edit.expr.checkValidity() ||
+          this.edit.expr.value.length <= 0
+        ) {
+          return;
+        }
+        this.edit.filter.expr = this.edit.expr.value;
+        this.ignoreNext = true;
+        this.saveFilter(this.edit.filter, this.edit.row);
+      },
+      true
+    );
     const updateTypes = () => {
       if (!this.edit.filter) {
         return;
@@ -277,7 +290,7 @@ class FiltersUI extends VirtualTable {
         return;
       }
       this.edit.row = this.selection.first;
-      const f = this.edit.filter = this.filters[this.edit.row];
+      const f = (this.edit.filter = this.filters[this.edit.row]);
       if (!this.edit.filter) {
         this.resetEdits();
         return;
@@ -290,8 +303,7 @@ class FiltersUI extends VirtualTable {
       if (this.edit.filter.custom) {
         $("#filter-delete").classList.remove("hidden");
         $("#filter-reset").classList.add("hidden");
-      }
-      else {
+      } else {
         $("#filter-delete").classList.add("hidden");
         $("#filter-reset").classList.remove("hidden");
       }
@@ -300,17 +312,19 @@ class FiltersUI extends VirtualTable {
       if (!this.edit.filter) {
         return;
       }
-      this.edit.filter.delete().
-        then(this.reload.bind(this)).
-        catch(console.error);
+      this.edit.filter
+        .delete()
+        .then(this.reload.bind(this))
+        .catch(console.error);
     });
     $("#filter-reset").addEventListener("click", () => {
       if (!this.edit.filter) {
         return;
       }
-      this.edit.filter.reset().
-        then(this.reload.bind(this)).
-        catch(console.error);
+      this.edit.filter
+        .reset()
+        .then(this.reload.bind(this))
+        .catch(console.error);
     });
     this.reload().catch(console.error);
 
@@ -318,7 +332,7 @@ class FiltersUI extends VirtualTable {
       new CreateFilterDialog().show().catch(console.error);
     });
 
-    filters().then(filters => {
+    filters().then((filters) => {
       filters.on("changed", () => {
         this.reload().catch(console.error);
       });
@@ -351,8 +365,7 @@ class FiltersUI extends VirtualTable {
     try {
       this.invalidateRow(row);
       await filter.save();
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error(ex);
     }
   }
@@ -367,7 +380,10 @@ class FiltersUI extends VirtualTable {
       if (!f) {
         return null;
       }
-      const icon = iconForPath(`file${f.icon ? `.${f.icon}` : ""}`, ICON_BASE_SIZE);
+      const icon = iconForPath(
+        `file${f.icon ? `.${f.icon}` : ""}`,
+        ICON_BASE_SIZE
+      );
       return this.icons.get(icon);
     }
     return null;
@@ -379,20 +395,24 @@ class FiltersUI extends VirtualTable {
       return null;
     }
     switch (colid) {
-    case 0:
-      return f.label;
+      case 0:
+        return f.label;
 
-    case 1:
-      return f.expr;
+      case 1:
+        return f.expr;
 
-    case 2:
-      return [TYPE_LINK, TYPE_MEDIA].
-        map(t => f.type & t ? _(`filter-type-${t === TYPE_LINK ? "link" : "media"}`) : 0).
-        filter(e => e).
-        join(", ");
+      case 2:
+        return [TYPE_LINK, TYPE_MEDIA]
+          .map((t) =>
+            f.type & t
+              ? _(`filter-type-${t === TYPE_LINK ? "link" : "media"}`)
+              : 0
+          )
+          .filter((e) => e)
+          .join(", ");
 
-    default:
-      return "";
+      default:
+        return "";
     }
   }
 }
@@ -442,7 +462,7 @@ class LimitsUI extends VirtualTable {
         return;
       }
       this.edit.row = this.selection.first;
-      const l = this.edit.limit = this.limits[this.edit.row];
+      const l = (this.edit.limit = this.limits[this.edit.row]);
       if (!l) {
         this.resetEdits();
         return;
@@ -453,16 +473,14 @@ class LimitsUI extends VirtualTable {
       if (l.concurrent <= 0) {
         this.edit.conunlimited.checked = true;
         this.edit.conlimit.value = "3";
-      }
-      else {
+      } else {
         this.edit.conlimited.checked = true;
         this.edit.conlimit.value = l.concurrent;
       }
 
       if (l.domain === "*") {
         this.edit.delete.classList.add("hidden");
-      }
-      else {
+      } else {
         this.edit.delete.classList.remove("hidden");
       }
     });
@@ -480,32 +498,28 @@ class LimitsUI extends VirtualTable {
       try {
         if (this.edit.domain.value !== "*") {
           domain = hostToDomain(this.edit.domain.value);
-        }
-        else {
+        } else {
           domain = "*";
         }
         if (!domain) {
-          this.edit.domain.setCustomValidity(
-            _("invalid-domain-pref"));
+          this.edit.domain.setCustomValidity(_("invalid-domain-pref"));
           return;
         }
-      }
-      catch (ex) {
+      } catch (ex) {
         console.error(ex.message, ex.stack, ex);
-        this.edit.domain.setCustomValidity(
-          _("invalid-domain-pref"));
+        this.edit.domain.setCustomValidity(_("invalid-domain-pref"));
         this.edit.domain.setCustomValidity(ex.message || ex.toString());
         return;
       }
       if (this.edit.conlimited.checked && !this.edit.conlimit.checkValidity()) {
         return;
       }
-      const concurrent = this.edit.conunlimited.checked ?
-        -1 :
-        parseInt(this.edit.conlimit.value, 10);
+      const concurrent = this.edit.conunlimited.checked
+        ? -1
+        : parseInt(this.edit.conlimit.value, 10);
       Limits.saveEntry(domain, {
         domain,
-        concurrent
+        concurrent,
       });
     });
 
@@ -538,18 +552,17 @@ class LimitsUI extends VirtualTable {
       return null;
     }
     switch (colid) {
-    case 0:
-      return f.domain;
+      case 0:
+        return f.domain;
 
-    case 1:
-      return f.concurrent <= 0 ? _("unlimited") : f.concurrent;
+      case 1:
+        return f.concurrent <= 0 ? _("unlimited") : f.concurrent;
 
-    default:
-      return "";
+      default:
+        return "";
     }
   }
 }
-
 
 addEventListener("DOMContentLoaded", async () => {
   await localize(document.documentElement);
@@ -559,7 +572,6 @@ addEventListener("DOMContentLoaded", async () => {
   new BoolPref("pref-queue-notification", "queue-notification");
   new BoolPref("pref-finish-notification", "finish-notification");
   // XXX: #125
-  const sounds = new BoolPref("pref-sounds", "sounds");
   new BoolPref("pref-hide-context", "hide-context");
   new BoolPref("pref-tooltip", "tooltip");
   new BoolPref("pref-open-manager-on-queue", "open-manager-on-queue");
@@ -579,7 +591,10 @@ addEventListener("DOMContentLoaded", async () => {
       await Prefs.reset(k);
     }
     await ModalDialog.inform(
-      _("information.title"), _("reset-confirmations.done"), _("ok"));
+      _("information.title"),
+      _("reset-confirmations.done"),
+      _("ok")
+    );
   });
   $("#reset-layout").addEventListener("click", async () => {
     for (const k of Prefs) {
@@ -595,9 +610,11 @@ addEventListener("DOMContentLoaded", async () => {
       await Prefs.reset(k);
     }
     await ModalDialog.inform(
-      _("information.title"), _("reset-layouts.done"), _("ok"));
+      _("information.title"),
+      _("reset-layouts.done"),
+      _("ok")
+    );
   });
-
 
   const langs = $<HTMLSelectElement>("#languages");
   const currentLang = getCurrentLanguage();
@@ -611,12 +628,16 @@ addEventListener("DOMContentLoaded", async () => {
     langs.appendChild(langEl);
   }
   langs.addEventListener("change", async () => {
-    await storage.sync.set({language: langs.value});
+    await storage.sync.set({ language: langs.value });
     if (langs.value === currentLang) {
       return;
     }
     // eslint-disable-next-line max-len
-    if (confirm("Changing the selected translation requires restarting the extension.\nDo you want to restart the extension now?")) {
+    if (
+      confirm(
+        "Changing the selected translation requires restarting the extension.\nDo you want to restart the extension now?"
+      )
+    ) {
       runtime.reload();
     }
   });
@@ -635,17 +656,19 @@ addEventListener("DOMContentLoaded", async () => {
   $<HTMLInputElement>("#loadCustomLocale").addEventListener("click", () => {
     customLocale.click();
   });
-  $<HTMLInputElement>("#clearCustomLocale").
-    addEventListener("click", async () => {
+  $<HTMLInputElement>("#clearCustomLocale").addEventListener(
+    "click",
+    async () => {
       await saveCustomLocale(undefined);
       runtime.reload();
-    });
+    }
+  );
   customLocale.addEventListener("change", async () => {
     if (!customLocale.files || !customLocale.files.length) {
       return;
     }
     const [file] = customLocale.files;
-    if (!file || file.size > (5 << 20)) {
+    if (!file || file.size > 5 << 20) {
       return;
     }
     try {
@@ -662,8 +685,7 @@ addEventListener("DOMContentLoaded", async () => {
       if (confirm("Imported your file.\nWant to reload the extension now?")) {
         runtime.reload();
       }
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error(ex);
       alert(`Could not load your translation file:\n${ex.toString()}`);
     }
