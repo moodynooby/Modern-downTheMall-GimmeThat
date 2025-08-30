@@ -33,21 +33,6 @@ const menus = typeof (_menus) !== "undefined" && _menus || _cmenus;
 
 const GATHER = "/bundles/content-gather.js";
 
-const CHROME_CONTEXTS = Object.freeze(new Set([
-  "all",
-  "audio",
-  "browser_action",
-  "editable",
-  "frame",
-  "image",
-  "launcher",
-  "link",
-  "page",
-  "page_action",
-  "selection",
-  "video",
-]));
-
 async function runContentJob(tab: Tab, file: string, msg: any) {
   try {
     if (tab && tab.incognito && msg) {
@@ -144,111 +129,6 @@ locale.then(() => {
       super();
       this.onClicked = this.onClicked.bind(this);
       const alls = new Map<string, string[]>();
-      const menuCreate = (options: any) => {
-        if (CHROME) {
-          delete options.icons;
-          options.contexts = options.contexts.
-            filter((e: string) => CHROME_CONTEXTS.has(e));
-          if (!options.contexts.length) {
-            return;
-          }
-        }
-        if (options.contexts.includes("all")) {
-          alls.set(options.id, options.contexts);
-        }
-        menus.create(options);
-      };
-      menuCreate({
-        id: "DTARegularLink",
-        contexts: ["link"],
-        title: _("dta.regular.link"),
-      });
-      menuCreate({
-        id: "DTATurboLink",
-        contexts: ["link"],
-        title: _("dta.turbo.link"),
-      });
-      menuCreate({
-        id: "DTARegularImage",
-        contexts: ["image"],
-        title: _("dta.regular.image"),
-      });
-      menuCreate({
-        id: "DTATurboImage",
-        contexts: ["image"],
-        title: _("dta.turbo.image"),
-      });
-      menuCreate({
-        id: "DTARegularMedia",
-        contexts: ["video", "audio"],
-        title: _("dta.regular.media"),
-      });
-      menuCreate({
-        id: "DTATurboMedia",
-        contexts: ["video", "audio"],
-
-        title: _("dta.turbo.media"),
-      });
-      menuCreate({
-        id: "DTARegularSelection",
-        contexts: ["selection"],
-        title: _("dta.regular.selection"),
-      });
-      menuCreate({
-        id: "DTATurboSelection",
-        contexts: ["selection"],
-     
-        title: _("dta.turbo.selection"),
-      });
-      menuCreate({
-        id: "DTARegular",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("dta.regular"),
-      });
-      menuCreate({
-        id: "DTATurbo",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("dta.turbo"),
-      });
-      menuCreate({
-        id: "sep-1",
-        contexts: ["all", "browser_action", "tools_menu"],
-        type: "separator"
-      });
-      menuCreate({
-        id: "DTARegularAll",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("dta-regular-all"),
-      });
-      menuCreate({
-        id: "DTATurboAll",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("dta-turbo-all"),
-      });
-      const sep2ctx = menus.ACTION_MENU_TOP_LEVEL_LIMIT === 6 ?
-        ["all", "tools_menu"] :
-        ["all", "browser_action", "tools_menu"];
-      menuCreate({
-        id: "sep-2",
-        contexts: sep2ctx,
-        type: "separator"
-      });
-      menuCreate({
-        id: "DTAAdd",
-        contexts: ["all", "browser_action", "tools_menu"],
-      
-        title: _("add-download"),
-      });
-      menuCreate({
-        id: "sep-3",
-        contexts: ["all", "browser_action", "tools_menu"],
-        type: "separator"
-      });
-      menuCreate({
-        id: "DTAPrefs",
-        contexts: ["all", "browser_action", "tools_menu"],
-        title: _("prefs.short"),
-      });
       Object.freeze(alls);
 
       const adjustMenus = (v: boolean) => {
@@ -467,9 +347,7 @@ locale.then(() => {
         popup: type !== "popup" ? "" : "/windows/popup.html"
       });
       let icons = {
-        "16": "style/icon16.png",
         "32": "style/icon32.png",
-        "64": "style/icon64.png",
         "128": "style/icon128.png"
       };
     

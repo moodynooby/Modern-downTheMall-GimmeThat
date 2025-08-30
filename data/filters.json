@@ -38,7 +38,7 @@
 		"expr": "/\\.(?:jp(?:e?g|e|2)|gif|png|tiff?|bmp|ico|heic|heif|webp|avif|jxr|wdp|dng|cr2|arw)$/i",
 		"type": 3,
 		"active": false,
-		"icon": "jpg"
+		"icon": "png"
 	},
 	"deffilter-imggif": {
 		"label": "GIF",
@@ -47,12 +47,12 @@
 		"active": false,
 		"icon": "gif"
 	},
-	"deffilter-imgjpg": {
+	"deffilter-imgpng": {
 		"label": "JPEG",
 		"expr": "/\\.jp(e?g|e|2)$/i",
 		"type": 3,
 		"active": true,
-		"icon": "jpg"
+		"icon": "png"
 	},
 	"deffilter-imgpng": {
 		"label": "PNG",

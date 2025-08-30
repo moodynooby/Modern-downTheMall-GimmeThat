@@ -41,9 +41,9 @@ async function getIcon(size: number, manId: number) {
 }
 
 const SYNONYMS = Object.freeze(new Map<string, string>([
-  ["jpe", "jpg"],
-  ["jpeg", "jpg"],
-  ["jfif", "jpg"],
+  ["jpe", "png"],
+  ["jpeg", "png"],
+  ["jfif", "png"],
   ["mpe", "mpg"],
   ["mpeg", "mpg"],
   ["m4v", "mp4"],

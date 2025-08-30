@@ -17,13 +17,15 @@ FILES = [
   "uikit/css/*",
   "windows/*.html",
   "Readme.*",
-  ]
+]
 
-RELEASE_ID = "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}"
+RELEASE_ID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}"
 
 UNCOMPRESSABLE = set((".png", ".jpg", ".zip", ".woff2"))
 IGNORED = set((".DS_Store", "Thumbs.db"))
 # XXX: #125
+IGNORED_OPERA = set(("done.opus", "error.opus"))
+
 PERM_IGNORED_FX = set(("downloads.shelf", "webRequest", "webRequestBlocking"))
 PERM_IGNORED_CHROME = set(("menus", "sessions", "theme"))
 
@@ -50,6 +52,7 @@ def build(out, manifest, additional_ignored=set()):
       else:
         with file.open("rb") as fp:
           buf = fp.read()
+
       zinfo = ZipInfo(str(file), date_time=(2019, 1, 1, 0, 0, 0))
       if file.suffix in UNCOMPRESSABLE:
         zp.writestr(zinfo, buf, compress_type=ZIP_STORED)
@@ -71,7 +74,7 @@ def build_firefox(args):
 
   if args.mode != "release":
     infos["version_name"] = f"{version}-{args.mode}"
-    infos["browser_specific_settings"]["gecko"]["id"] = f"{args.mode}@GT.org"
+    infos["browser_specific_settings"]["gecko"]["id"] = f"{args.mode}@downthemall.org"
     infos["short_name"] = infos.get("name")
     infos["name"] = f"{infos.get('name')} {args.mode}"
   else:
@@ -85,8 +88,7 @@ def build_firefox(args):
     out.unlink()
   print("Output", out)
   build(out, json.dumps(infos, indent=2).encode("utf-8"))
-
-
+  
 def build_chromium(args, pkg, additional_ignored=set()):
   now = datetime.now().strftime("%Y%m%d%H%M%S")
   with open("manifest.json") as manip:
@@ -125,6 +127,8 @@ def main():
     else:
       run([script], shell=True)
   build_firefox(args)
+  build_chromium(args, "crx")
+  build_chromium(args, "opr", IGNORED_OPERA)
   print("DONE.")
 
 if __name__ == "__main__":

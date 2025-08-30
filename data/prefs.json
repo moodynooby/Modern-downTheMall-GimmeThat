@@ -8,7 +8,7 @@
 	"open-manager-on-queue": true,
 	"text-links": true,
 	"add-paused": false,
-	"hide-context": false,
+	"hide-context": true,
 	"conflict-action": "uniquify",
 	"nagging": 0,
 	"nagging-next": 7,

@@ -13,8 +13,8 @@
     "stats": "cloc --vcs=git --exclude-lang=Markdown,SVG",
     "test": "LANG=en mocha -r ts-node/register -r chai/register-expect.js tests",
     "watch": "webpack --watch",
-    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../GT.p --keep-profile-changes"
-    },
+    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../GT.p --keep-profile-changes --firefox=\"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\""
+  },
   "author": "Manas Doshi",
   "license": "GPL-2.0",
   "devDependencies": {
@@ -36,7 +36,7 @@
     "@types/whatwg-mimetype": "^3.0.0",
     "localforage": "^1.9.0",
     "psl": "^1.4.0",
-    "web-ext": "^8.5.0",
+    "web-ext": "^8.9.0",
     "webextension-polyfill": "^0.10.0",
     "whatwg-mimetype": "^3.0.0"
   },
