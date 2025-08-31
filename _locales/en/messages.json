@@ -239,10 +239,6 @@
     "description": "Checkbox label. Keep it short",
     "message": "Disable others"
   },
-  "donate": {
-    "description": "Donate button",
-    "message": "Donate!"
-  },
   "done": {
     "description": "Status text",
     "message": "Done"
@@ -516,20 +512,6 @@
   "move_up": {
     "description": "Action for moving a download up",
     "message": "Up"
-  },
-  "nagging_message": {
-    "description": "Donation nagging message; displayed as a notification bar in manager",
-    "message": "You've added $DOWNLOADS$ downloads",
-    "placeholders": {
-      "downloads": {
-        "content": "$1",
-        "example": ""
-      }
-    }
-  },
-  "never_ask_again": {
-    "description": "Donation button",
-    "message": "Do not ask me again"
   },
   "no_links": {
     "description": "Notification text",

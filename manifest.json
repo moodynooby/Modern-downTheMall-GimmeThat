@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Gimme That!",
-  "version": "4.99",
+  "version": "5",
 
   "description": "__MSG_extensionDescription__",
   "author": "Manas",

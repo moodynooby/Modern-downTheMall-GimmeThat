@@ -1,4 +1,5 @@
 /* License: MIT */
+@import '/style/common.css';
 
 .modal-container {
   font: message-box;

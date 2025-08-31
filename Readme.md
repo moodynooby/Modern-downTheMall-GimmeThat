@@ -10,6 +10,7 @@ Gimme That! !’s philosophy: **Less is more. The core features you need, nothin
 This approach ensures a **minimal, clean, and efficient** mass downloader.
 
 ### Release Notes
+
 #### v4.99
 The extension is being rebranded and rewritten to better emphasize its **simplicity** and **minimal, hassle-free experience** to be more user-focused while maintaining a modern, developer-focused appeal.
 

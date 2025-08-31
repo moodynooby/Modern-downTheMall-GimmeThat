@@ -131,9 +131,6 @@ export class MenuFilter extends ItemFilter {
   }
 
   async show(evt: MenuPosition) {
-    Array.from(this.menu).
-      filter(e => e.startsWith("ctx-menufilter-item-")).
-      forEach(e => this.menu.remove(e));
     this.items.clear();
     await this.populate();
     for (const {item} of Array.from(this.items.values()).reverse()) {
@@ -487,7 +484,6 @@ export class FilteredCollection extends EventEmitter {
 
     function allow(item: DownloadItem) {
       if (!filters.every(f => f.allow(item))) {
-        delete item.filteredPosition;
         return false;
       }
       item.filteredPosition = idx++;
@@ -531,7 +527,6 @@ export class FilteredCollection extends EventEmitter {
       item.position = this.items.push(item) - 1;
       this.emit("added", item);
       if (this.filters.length && !this.filters.every(f => f.allow(item))) {
-        delete item.filteredPosition;
         return false;
       }
 
@@ -576,7 +571,6 @@ export class FilteredCollection extends EventEmitter {
     }
     this.filtered.splice(item.filteredPosition, 1);
     this._reassignPositions();
-    delete item.filteredPosition;
     this.table.rowCountChanged(item.filteredPosition, -1);
     this.emit("changed");
   }

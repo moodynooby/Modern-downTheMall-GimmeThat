@@ -7,7 +7,7 @@ import { ContextMenu } from "./contextmenu";
 import { iconForPath } from "../lib/windowutils";
 import { _, localize, locale } from "../lib/i18n";
 import { Prefs } from "../lib/prefs";
-import { MASK, FASTFILTER, SUBFOLDER } from "../lib/recentlist";
+import {FASTFILTER } from "../lib/recentlist";
 import { WindowState } from "./windowstate";
 import { Dropdown } from "./dropdown";
 import { Keys } from "./keys";
@@ -24,7 +24,6 @@ import { BaseItem } from "../lib/item";
 import { ItemDelta } from "../lib/select";
 // eslint-disable-next-line no-unused-vars
 import { TableConfig } from "../uikit/lib/config";
-import { validateSubFolder as validateSubfolder } from "../lib/util";
 import "./theme";
 
 const PORT: RawPort = runtime.connect(null, { name: "select" });
@@ -42,9 +41,7 @@ const ICON_BASE_SIZE = 16;
 const NUM_FILTER_CLASSES = 8;
 
 let Table: SelectionTable;
-let Mask: Dropdown;
 let FastFilter: Dropdown;
-let Subfolder: Dropdown;
 
 
 type DELTAS = {deltaLinks: ItemDelta[]; deltaMedia: ItemDelta[]};
@@ -267,7 +264,6 @@ class SelectionTable extends VirtualTable {
 
     localize(($("#table-context") as HTMLTemplateElement).content);
     this.contextMenu = new ContextMenu("#table-context");
-    Keys.adoptContext(this.contextMenu);
 
     this.sortcol = null;
     this.sortasc = true;
@@ -674,13 +670,6 @@ class SelectionTable extends VirtualTable {
 
 async function download(paused = false) {
   try {
-    const mask = Mask.value;
-    if (!mask) {
-      throw new Error("error.invalidMask");
-    }
-    const subfolder = Subfolder.value;
-    validateSubfolder(subfolder);
-
     const items = Table.items.checkedBackIndexes;
     if (!items.length) {
       throw new Error("error.noItemsSelected");
@@ -710,12 +699,8 @@ async function download(paused = false) {
       options: {
         type: Table.type,
         paused,
-        mask,
-        maskOnce: $<HTMLInputElement>("#maskOnceCheck").checked,
         fast: FastFilter.value,
         fastOnce: $<HTMLInputElement>("#fastOnceCheck").checked,
-        subfolder,
-        subfolderOnce: $<HTMLInputElement>("#subfolderOnceCheck").checked,
       }
     });
   }
@@ -791,9 +776,6 @@ function cancel() {
 }
 
 async function init() {
-  await Promise.all([MASK.init(), FASTFILTER.init(), SUBFOLDER.init()]);
-  Mask = new Dropdown("#mask", MASK.values);
-  Mask.on("changed", clearErrors);
   FastFilter = new Dropdown("#fast", FASTFILTER.values);
   FastFilter.on("changed", () => {
     PORT.postMessage({
@@ -801,8 +783,6 @@ async function init() {
       fastFilter: FastFilter.value
     });
   });
-  Subfolder = new Dropdown("#subfolder", SUBFOLDER.values);
-  Subfolder.on("changed", clearErrors);
 }
 
 const LOADED = new Promise(resolve => {

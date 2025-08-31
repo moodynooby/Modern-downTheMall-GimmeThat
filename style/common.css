@@ -2,77 +2,85 @@
 /* License: gpl-v2 */
 
 :root {
-  --general-color: #2a2a2e;
-  --general-bgcolor: rgb(249, 249, 250);
-  --general-border-color: lightgray;
-  --general-input-color: black;
-  --general-input-bgcolor: white;
-  --general-button-color: black;
-  --general-button-bgcolor: rgb(246, 246, 246);
-  --general-button-bgcolor-hover: white;
-  --general-button-shadow: 0px 0px 5px 1px rgba(128, 128, 128, 0.5);
-  --menu-bgcolor: white;
-  --menu-bgcolor-hover: #2283fb;
-  --table-bgcolor: white;
-  --table-head-bgcolor: white;
-  --toolbar-bg-color: rgba(18, 6, 248, 0.5);
-  --toolbar-active-border-color: #478de7;
-  --toolbar-hover-border-color: rgb(0, 255, 8);
-  --toolbar-hover-background: rgba(37, 153, 247, 0.8);
+  --general-color: #333340; /* softer dark for text */
+  --general-bgcolor: #f5f6fa; /* very light, cool off-white */
+  --general-border-color: #d1d4db; /* subtle cool gray */
+  --general-input-color: #2e2e38; /* dark slate */
+  --general-input-bgcolor: #ffffff; /* clean white */
+  --general-button-color: #2e2e38; /* consistent dark for text */
+  --general-button-bgcolor: #e6e8f0; /* subtle pale lavender-blue */
+  --general-button-bgcolor-hover: #cbd0e0; /* gentle hover shade */
+  --general-button-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* soft shadow */
+  --menu-bgcolor: #ffffff; /* crisp white */
+  --menu-bgcolor-hover: #4a76f6; /* bright modern blue */
+  --table-bgcolor: #ffffff; /* clean white table */
+  --table-head-bgcolor: #f1f3f9; /* subtle pale background for headers */
+  --toolbar-bg-color: #3867d6; /* modern blue */
+  --toolbar-active-border-color: #5977e9; /* lighter border highlight */
+  --toolbar-hover-border-color: #2a78f4; /* bright blue on hover border */
+  --toolbar-hover-background: #4e81ffcc; /* translucent bright blue */
   --toolbar-border-width: 2px;
-  --toolbar-border: 1px solid rgba(255, 255, 255, 0.5);
-  --add-color: navy;
-  --queue-color: gray;
-  --pause-color: #ffa318;
-  --retry-color: rgb(0, 112, 204);
-  --error-color: rgb(160, 13, 42);
-  --running-color: #aae061;
-  --finishing-color: #57cc12;
-  --done-color: #008f00;
-  --force-color: #0a610a;
-  --folder-color: rgb(214, 165, 4);
-  --maskbutton-color: rgb(236, 185, 16);
-  --missing-color: rgb(0, 82, 204);
-  --open-color: rgba(236, 185, 16, 0.8);
-  --status-icon-color: #363636;
-  --status-icon-color-hover: #6e6d6d;
-  --file-icon-image-color: rgb(17, 107, 163);
-  --popup-bgcolor: #fff;
-  --popup-color: #0c0c0d;
-  --modal-color: black;
-  --modal-bgcolor: white;
+  --toolbar-border: 1px solid #a3aedc; /* soft border */
+  --add-color: #4a90e2; /* modern soft blue */
+  --queue-color: #9aa0ac; /* muted gray for inactive */
+  --pause-color: #f5a623; /* warm amber */
+  --retry-color: #3578e5; /* rich blue */
+  --error-color: #e94f4f; /* vivid but modern red */
+  --running-color: #a8d5ba; /* muted green */
+  --finishing-color: #6abd89; /* fresh green */
+  --done-color: #3a8f46; /* solid green */
+  --force-color: #2d6a2d; /* darker green */
+  --folder-color: #f0c419; /* vibrant gold */
+  --maskbutton-color: #f5b700; /* warm yellow */
+  --missing-color: #3578e5; /* bright blue for missing */
+  --open-color: #f5b700cc; /* translucent warm yellow */
+  --status-icon-color: #555770; /* softer dark gray */
+  --status-icon-color-hover: #7b7d92; /* medium gray hover */
+  --file-icon-image-color: #3b6ecb; /* friendly blue */
+  --popup-bgcolor: #ffffff;
+  --popup-color: #2e2e38;
+  --modal-color: #2e2e38;
+  --modal-bgcolor: #ffffff;
 }
 
 html.dark {
-  --add-color: lightblue;
-  --error-color: rgb(130, 3, 22);
-  --running-color: #67a041;
-  --finishing-color: #4bb111;
-  --done-color: #006f00;
-  --pause-color: #cf9308;
-  --general-bgcolor: #2a2a2e;
-  --general-border-color: rgb(85, 85, 85);
-  --general-button-bgcolor-hover: black;
-  --general-button-bgcolor: rgb(36, 36, 36);
-  --general-button-color: white;
-  --general-color: rgb(249, 249, 250);
-  --menu-bgcolor: black;
-  --menu-bgcolor-hover: #1a6bce;
-  --table-bgcolor: #1a1a1e;
-  --table-head-bgcolor: #3a3a3e;
-  --toolbar-bg-color: rgb(20, 164, 196);
-  --status-icon-color: #b9b9b9;
-  --status-icon-color-hover: #e2e2e2;
-  --toolbar-border: 1px solid rgba(30, 30, 30, 0.5);
-  --file-icon-image-color: rgb(21, 130, 197);
-  --popup-bgcolor: #4a4a4f;
-  --popup-color: rgb(249, 249, 250);
-  --general-button-shadow: 0px 0px 7px 1px rgba(128, 128, 128, 0.8);
-  --modal-color: white;
-  --modal-bgcolor: #333;
-  scrollbar-color: rgba(249, 249, 250, 0.4) rgba(20, 20, 25, 0.3);
+  --add-color: #8ab9f7; /* soft light blue */
+  --error-color: #ce5757; /* muted red */
+  --running-color: #8acb89; /* softer green */
+  --finishing-color: #729e6f; /* desaturated green */
+  --done-color: #4e794d; /* muted dark green */
+  --pause-color: #d1a843; /* mellow amber */
+  --general-bgcolor: #252733; /* dark slate */
+  --general-border-color: #464a5a; /* muted border */
+  --general-button-bgcolor-hover: #3c3f51; /* dark hover */
+  --general-button-bgcolor: #2e303f; /* dark button bg */
+  --general-button-color: #e1e2ec; /* light text */
+  --general-color: #e1e2ec;
+  --menu-bgcolor: #2c2f3f; /* dark background */
+  --menu-bgcolor-hover: #437de3; /* bright blue */
+  --table-bgcolor: #2c2f3f;
+  --table-head-bgcolor: #3c3f51cc; /* translucent */
+  --toolbar-bg-color: #3282db; /* medium blue */
+  --status-icon-color: #9aa1b4; /* light gray */
+  --status-icon-color-hover: #c1c5d8; /* lighter */
+  --toolbar-border: 1px solid #3d4362; /* subtle border */
+  --file-icon-image-color: #5192e0; /* friendly blue */
+  --popup-bgcolor: #3a3f51;
+  --popup-color: #e1e2ec;
+  --general-button-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --modal-color: #e1e2ec;
+  --modal-bgcolor: #2e303f;
+  scrollbar-color: #e1e2ec88 #1f202c;
 }
 
+button{
+  border-radius: 5px;
+  background: var(--general-button-bgcolor);
+  color: var(--general-button-color);
+}
+button:hover{
+  background: var(--general-button-bgcolor-hover);
+}
 html.dark a {
   color: lightblue;
 }
@@ -199,11 +207,7 @@ section {
 }
 
 .virtualtable-column:active {
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.03),
-    rgba(128, 128, 128, 0.1)
-  );
+  background-color: var(--toolbar-bg-color);
 }
 
 th.virtualtable {
@@ -229,12 +233,7 @@ td.virtualtable {
   font-size: 12px;
   align-items: stretch;
   justify-items: center;
-  background: linear-gradient(
-    to bottom,
-    rgba(128, 128, 128, 0.1) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  border-top: 1px solid rgba(128, 128, 128, 0.6);
+  border-top: 1px solid var(--general-border-color);
   display: flex;
   margin-bottom: 1ex;
   overflow: auto;
@@ -261,7 +260,7 @@ td.virtualtable {
   flex-grow: 3;
   margin-right: 2ex;
   padding-right: 1ex;
-  border-right: 1px dotted rgba(128, 128, 128, 0.6);
+  border-right: 1px dotted var(--general-border-color);
 }
 
 #statusPrefs {
@@ -294,8 +293,8 @@ td.virtualtable {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  color: black;
-  background: white;
+  color: var(--general-input-color);
+  background: var(--general-input-bgcolor);
   border: none;
   bottom: 2px;
   box-sizing: content-box;
@@ -305,13 +304,12 @@ td.virtualtable {
   padding: 2px;
   position: absolute;
   top: 3px;
-  width: calc(100% - 36px);
 }
 
 #notification {
   display: none;
-  color: white;
-  background: red;
+  color: var(--general-input-color);
+  background: var(--error-color);
   margin: 0;
   padding-top: 1ex;
   padding-bottom: 1ex;
@@ -319,7 +317,7 @@ td.virtualtable {
 
 @supports (not (-moz-appearance: none)) {
   .dropdown select {
-    background: white;
+    background: var(--general-input-bgcolor);
   }
 }
 
@@ -348,8 +346,8 @@ td.virtualtable {
   font-size: 90%;
   position: fixed;
   border-radius: 4px;
-  background: InfoBackground;
-  color: InfoText;
+  background: var(--general-bgcolor);
+  color: var(--general-color);
 }
 
 .renamer-map.hidden {

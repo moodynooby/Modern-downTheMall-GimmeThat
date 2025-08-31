@@ -10,8 +10,6 @@
 	"add-paused": false,
 	"hide-context": true,
 	"conflict-action": "uniquify",
-	"nagging": 0,
-	"nagging-next": 7,
 	"tooltip": true,
 	"show-urls": false,
 	"remove-missing-on-init": false,

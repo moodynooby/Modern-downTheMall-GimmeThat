@@ -1,5 +1,5 @@
 /* License: MIT */
-
+@import '/style/common.css';
 ul.context-menu,
 ul.context-menu ul {
   -webkit-user-select: none;
@@ -7,15 +7,12 @@ ul.context-menu ul {
   position: fixed;
   max-height: 98%;
   min-width: 20ex;
-  background: white;
-  color: black;
   margin: 0;
   padding: 0;
   list-style-type: none;
   font: menu;
-  border: 1px solid rgba(90,90,90,0.7);
+  border: 1px solid var(--general-border-color);
   border-radius: 2px;
-  box-shadow: 2px 2px 8px 1px rgba(90,90,90,0.3);
   overflow-y: auto;
 }
 

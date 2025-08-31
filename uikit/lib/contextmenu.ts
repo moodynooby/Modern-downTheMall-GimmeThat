@@ -3,30 +3,12 @@
 
 import {EventEmitter} from "./events";
 import {Rect} from "./rect";
-import {debounce, IS_MAC} from "./util";
+import {debounce} from "./util";
 
 const CLICK_DIFF = 16;
 const MENU_OPEN_BOUNCE = 500;
 
 let ids = 0;
-
-export const Keys = new Map([
-  ["ACCEL", IS_MAC ? "⌘" : "Ctrl"],
-  ["CTRL", "Ctrl"],
-  ["ALT", IS_MAC ? "⌥" : "Alt"],
-  ["SHIFT", "⇧"],
-]);
-
-function toKeyTextMap(k: string) {
-  k = k.trim();
-  const ku = k.toUpperCase();
-  const v = Keys.get(ku);
-  return v ? v : k.startsWith("Key") ? k.slice(3) : k;
-}
-
-function toKeyText(key: string) {
-  return key.split("-").map(toKeyTextMap).join(" ");
-}
 
 export interface MenuPosition {
   clientX: number;
@@ -37,7 +19,6 @@ interface MenuOptions {
   disabled?: string;
   allowClick?: string;
   icon?: string;
-  key?: string;
   autoHide?: string;
 }
 
@@ -50,8 +31,6 @@ export class MenuItemBase {
 
   public readonly icon: string;
 
-  public readonly key: string;
-
   public readonly autoHide: boolean;
 
   public readonly elem: HTMLLIElement;
@@ -60,7 +39,6 @@ export class MenuItemBase {
 
   public readonly textElem: HTMLSpanElement;
 
-  public readonly keyElem: HTMLSpanElement;
 
   constructor(owner: ContextMenu, id = "", text = "", options: MenuOptions) {
     this.owner = owner;
@@ -70,17 +48,14 @@ export class MenuItemBase {
     this.id = id;
     this.text = text || "";
     this.icon = options.icon || "";
-    this.key = options.key || "";
     this.autoHide = options.autoHide !== "false";
 
     this.elem = document.createElement("li");
     this.elem.id = this.id;
     this.iconElem = document.createElement("span");
     this.textElem = document.createElement("span");
-    this.keyElem = document.createElement("span");
     this.elem.appendChild(this.iconElem);
     this.elem.appendChild(this.textElem);
-    this.elem.appendChild(this.keyElem);
   }
 
   materialize() {
@@ -95,13 +70,6 @@ export class MenuItemBase {
 
     this.textElem.textContent = this.text;
     this.textElem.className = "context-menu-text";
-
-    if (this.key) {
-      this.elem.dataset.key = this.key;
-    }
-    this.keyElem.textContent = toKeyText(this.key);
-    this.keyElem.className = "context-menu-key";
-    this.keyElem.style.display = this.key ? "inline-block" : "none";
   }
 }
 
@@ -356,10 +324,6 @@ export class ContextMenu extends EventEmitter {
   hide() {
     this.elem.style.top = "0px";
     this.elem.style.left = "-10000px";
-  }
-
-  *[Symbol.iterator]() {
-    yield *this.itemMap.keys();
   }
 
   get(id: string) {

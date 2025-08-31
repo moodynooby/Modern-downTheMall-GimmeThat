@@ -310,12 +310,6 @@ export class Manager extends EventEmitter {
       return dl;
     });
 
-    Prefs.get("nagging", 0)
-      .then((v) => {
-        return Prefs.set("nagging", (v || 0) + items.length);
-      })
-      .catch(console.error);
-
     this.scheduler = null;
     this.save(items);
     this.startNext();

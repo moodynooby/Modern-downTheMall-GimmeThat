@@ -59,19 +59,10 @@ body > * {
 }
 
 #toolbar > .button.disabled {
-  color: rgb(0, 0, 0) !important;
-  background-color: darkgray !important;
+  color: var(--general-button-text-color) !important;
+  background-color: var(--general-button-bgcolor) !important;
   opacity: 0.4;
   cursor: initial;
-}
-
-#toolbar > .button:hover:not(.disabled) {
-  background: black;
-  box-shadow: 0px 0px 7px 2px rgba(70, 70, 70, 0.75);
-}
-
-#toolbar > .button:active {
-  box-shadow: 0px 0px 7px 2px rgba(220, 220, 220, 0.75);
 }
 
 #downloads {
@@ -122,18 +113,6 @@ body > * {
 #colSegments,
 #colMask {
   display: none;
-}
-
-.donate {
-  margin-right: 1ex;
-  top: 0;
-  height: 33px;
-  width: 114px;
-  background: url(donate33.png) top right no-repeat;
-  cursor: pointer;
-}
-.donate:active {
-  background: url(donate33.png) bottom right no-repeat;
 }
 
 .virtualtable-body {
@@ -297,7 +276,7 @@ body > * {
 }
 
 #statusNetwork.icon-network-off {
-  color: crimson;
+  color: var(--error-color);
 }
 #statusNetwork.icon-network-on {
   color: var(--add-color);
@@ -306,7 +285,7 @@ body > * {
 #statusFilter {
   flex-grow: 0 !important;
   width: 40ex;
-  background: white;
+  background: var(--general-bgcolor);
   padding-left: 4px;
   border-radius: 8px;
   border: 0 !important;
@@ -320,7 +299,7 @@ body > * {
 }
 
 #statusFilter:focus-within {
-  box-shadow: 0 0 3px 1px #18afff;
+  box-shadow: 0 0 3px 1px var(--general-border-color);
 }
 
 #statusFilter .icon-find {
@@ -370,9 +349,9 @@ body > * {
 .deletefiles-list {
   padding-left: 1ex;
   padding-right: 1.5ex;
-  border: 1px solid lightgray;
+  border: 1px solid var(--general-border-color);
   border-radius: 6px;
-  background-color: rgba(128, 128, 128, 0.1);
+  background-color: var(--general-bgcolor);
   max-height: 8em;
   overflow-y: auto;
 }

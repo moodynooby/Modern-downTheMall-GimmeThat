@@ -709,9 +709,6 @@ export class DownloadTable extends VirtualTable {
     const prepareMenu = (prefix: string) => {
       const rem = (ctx.get(prefix) as SubMenuItem).menu;
       prefix += "-filter-";
-      Array.from(rem)
-        .filter((e) => e.startsWith(prefix))
-        .forEach((e) => rem.remove(e));
       for (const filt of filts.all) {
         if (typeof filt.id !== "string" || filt.id === "deffilter-all") {
           continue;
