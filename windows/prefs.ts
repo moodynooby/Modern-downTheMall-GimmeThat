@@ -568,7 +568,6 @@ addEventListener("DOMContentLoaded", async () => {
   await localize(document.documentElement);
 
   // General
-  new BoolPref("pref-manager-in-popup", "manager-in-popup");
   new BoolPref("pref-queue-notification", "queue-notification");
   new BoolPref("pref-finish-notification", "finish-notification");
   // XXX: #125

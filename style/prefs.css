@@ -73,24 +73,29 @@ input.tab {
 #tabsel-filters:checked ~ #tabs #tabel-filters {
   color: var(--general-color) !important;
   background: var(--general-bgcolor);
-  border-top: var(--toolbar-border-width) solid
+  border: var(--toolbar-border-width) solid
     var(--toolbar-active-border-color);
+    border-radius: 10px;
+  margin-top: 0.5em;
 }
 
 #tabs > label {
   transition: border-color 1s;
-  border-top: var(--toolbar-border-width) solid transparent;
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
-  border-left: var(--toolbar-border);
-  border-right: var(--toolbar-border);
-  background: var(--toolbar-bg-color);
+  border: var(--toolbar-border-width) solid
+  var(--toolbar-border-color);
+  margin-top: 0.5em;
+  color: var(--general-color);
+  border-radius: 10px;
+
 }
 
 #tabs > label:hover:not(:checked) {
-  border-top: var(--toolbar-border-width) solid
+  border: var(--toolbar-border-width) solid
     var(--toolbar-hover-border-color);
   background: var(--toolbar-hover-background);
+  margin-top: 0.5em;
+  border-radius: 10px;
+
 }
 
 #tab-filters {
@@ -137,8 +142,7 @@ fieldset {
   display: flex;
   margin-bottom: 1em;
   border: 1px solid var(--general-border-color);
-  border-radius: 6px;
-  background: rgba(128, 128, 128, 0.05);
+  border-radius: 10px;
   flex-direction: column;
   max-width: 60em;
   padding: 1.2em;
@@ -169,8 +173,7 @@ legend {
 
 .virtualtable-container {
   border: 1px solid var(--general-border-color);
-  border-radius: 6px;
-  background: rgba(128, 128, 128, 0.05);
+  border-radius: 10px;
 }
 
 #network-general {

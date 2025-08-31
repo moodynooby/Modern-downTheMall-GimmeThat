@@ -257,51 +257,51 @@
   },
   "dta_regular": {
     "description": "Regular dta action; Menu text",
-    "message": "Gimme That!"
+    "message": "Get"
   },
   "dta_regular_all": {
     "description": "Menu text",
-    "message": "Gimme That! - All Tabs"
+    "message": "Get All Tabs"
   },
   "dta_regular_image": {
     "description": "Menu text",
-    "message": "Save Image with Gimme That!"
+    "message": "Get Image"
   },
   "dta_regular_link": {
     "description": "Menu text",
-    "message": "Save Link with Gimme That!"
+    "message": "Get Link"
   },
   "dta_regular_media": {
     "description": "Menu text",
-    "message": "Save Media with Gimme That!"
+    "message": "Get Media"
   },
   "dta_regular_selection": {
     "description": "Menu text",
-    "message": "Save Selection with Gimme That!"
+    "message": "Get Selection"
   },
   "dta_turbo": {
     "description": "One Click! action; Menu text",
-    "message": "One Click!"
+    "message": "GRAB"
   },
   "dta_turbo_all": {
     "description": "Menu text",
-    "message": "One Click! - All Tabs"
+    "message": "GRAB All Tabs"
   },
   "dta_turbo_image": {
     "description": "Menu text",
-    "message": "Save Image with One Click!"
+    "message": "GRAB Image"
   },
   "dta_turbo_link": {
     "description": "Menu text",
-    "message": "Save Link with One Click!"
+    "message": "GRAB Link"
   },
   "dta_turbo_media": {
     "description": "Menu text",
-    "message": "Save Media with One Click!"
+    "message": "GRAB Media"
   },
   "dta_turbo_selection": {
     "description": "Menu text",
-    "message": "Save Selection with One Click!"
+    "message": "GRAB Selection"
   },
   "error_invalidMask": {
     "description": "Error message; single/select window",
@@ -483,7 +483,7 @@
   },
   "manager_title": {
     "description": "Window/tab title",
-    "message": "Gimme That! Manager"
+    "message": "Downloads Manager"
   },
   "mask": {
     "description": "Renaming mask (short); used in e.g. select",
@@ -519,7 +519,7 @@
   },
   "nagging_message": {
     "description": "Donation nagging message; displayed as a notification bar in manager",
-    "message": "You've added $DOWNLOADS$ downloads with Gimme That! so far! As a regular user you might want to consider a donation to support further development. Thanks!",
+    "message": "You've added $DOWNLOADS$ downloads",
     "placeholders": {
       "downloads": {
         "content": "$1",
@@ -647,7 +647,7 @@
   },
   "pref_queueing": {
     "description": "Preferences/General; group text",
-    "message": "Queuing Downloads"
+    "message": "Downloads"
   },
   "pref_remove_missing_on_init": {
     "description": "Preferences/General",
@@ -703,7 +703,7 @@
   },
   "prefs_title": {
     "description": "Window/tab title; Manager",
-    "message": "Gimme That! Manager"
+    "message": "Downloads Manager"
   },
   "queue_finished": {
     "description": "Notification text",
@@ -1059,7 +1059,7 @@
   },
   "select_title": {
     "description": "Title of the select window",
-    "message": "Gimme That! - Select your Downloads"
+    "message": "Select your Downloads"
   },
   "set_mask": {
     "description": "Menu text; select window",
@@ -1087,7 +1087,7 @@
   },
   "single_title": {
     "description": "Title of single window",
-    "message": "Gimme That! - Add a link"
+    "message": "Add a link"
   },
   "sizeB": {
     "description": "Size formatting; bytes",
