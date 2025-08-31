@@ -591,11 +591,11 @@
   },
   "pref_button_type": {
     "description": "label",
-    "message": "Gimme That! button:"
+    "message": "Download button:"
   },
   "pref_button_type_dta": {
     "description": "label",
-    "message": "Gimme That! selection"
+    "message": "Download selection"
   },
   "pref_button_type_manager": {
     "description": "label",
@@ -607,7 +607,7 @@
   },
   "pref_button_type_turbo": {
     "description": "label",
-    "message": "One Click!"
+    "message": "GRAB Quickly!"
   },
   "pref_concurrent_downloads": {
     "description": "Preferences/Network",
