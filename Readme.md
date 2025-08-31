@@ -1,17 +1,18 @@
-The extension can be rebranded and rewritten to better emphasize its **simplicity** and **minimal, hassle-free experience** while maintaining a modern, developer-focused appeal.
-
 ***
 
 ## Gimme That! ! – The Minimal Mass Downloader for Your Browser
 
 ### Description  
-A truly **minimalist**, fast, and hassle-free mass downloader for your browser. Designed to be lean, intuitive, and free of clutter, Gimme That! ! puts downloading in your hands—no distractions, just efficient downloading.
+A truly **user-focused**, fast, and hassle-free mass downloader for your browser. Designed to be lean, intuitive, and free of clutter, Gimme That! ! puts downloading in your hands—no distractions, just efficient downloading.
 
 ***
 Gimme That! !’s philosophy: **Less is more. The core features you need, nothing you don’t.**  
 This approach ensures a **minimal, clean, and efficient** mass downloader.
 
 ### Release Notes
+#### v4.99
+The extension is being rebranded and rewritten to better emphasize its **simplicity** and **minimal, hassle-free experience** to be more user-focused while maintaining a modern, developer-focused appeal.
+
 
 #### v2.6  
 With this update, Gimme That! ! becomes faster, lighter, and more focused on a seamless user experience.

@@ -19,7 +19,7 @@ FILES = [
   "Readme.*",
 ]
 
-RELEASE_ID = "{DDC359D1-844A-42a7-9AA1-88A850A938A8}"
+RELEASE_ID = "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}"
 
 UNCOMPRESSABLE = set((".png", ".jpg", ".zip", ".woff2"))
 IGNORED = set((".DS_Store", "Thumbs.db"))
