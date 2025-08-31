@@ -283,7 +283,7 @@ class MetalinkExporter implements Exporter {
     const document = window.document.implementation.
       createDocument(NS_METALINK_RFC5854, "metalink", null);
     const root = document.documentElement;
-    root.setAttributeNS(NS_DTA, "generator", "GimmeThat!");
+    root.setAttributeNS(NS_DTA, "generator", "Gimme That!");
     root.appendChild(document.createComment(
       "metalink !",
     ));

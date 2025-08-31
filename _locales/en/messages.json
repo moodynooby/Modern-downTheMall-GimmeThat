@@ -257,51 +257,51 @@
   },
   "dta_regular": {
     "description": "Regular dta action; Menu text",
-    "message": "GimmeThat!"
+    "message": "Gimme That!"
   },
   "dta_regular_all": {
     "description": "Menu text",
-    "message": "GimmeThat! - All Tabs"
+    "message": "Gimme That! - All Tabs"
   },
   "dta_regular_image": {
     "description": "Menu text",
-    "message": "Save Image with GimmeThat!"
+    "message": "Save Image with Gimme That!"
   },
   "dta_regular_link": {
     "description": "Menu text",
-    "message": "Save Link with GimmeThat!"
+    "message": "Save Link with Gimme That!"
   },
   "dta_regular_media": {
     "description": "Menu text",
-    "message": "Save Media with GimmeThat!"
+    "message": "Save Media with Gimme That!"
   },
   "dta_regular_selection": {
     "description": "Menu text",
-    "message": "Save Selection with GimmeThat!"
+    "message": "Save Selection with Gimme That!"
   },
   "dta_turbo": {
-    "description": "OneClick! action; Menu text",
-    "message": "OneClick!"
+    "description": "One Click! action; Menu text",
+    "message": "One Click!"
   },
   "dta_turbo_all": {
     "description": "Menu text",
-    "message": "OneClick! - All Tabs"
+    "message": "One Click! - All Tabs"
   },
   "dta_turbo_image": {
     "description": "Menu text",
-    "message": "Save Image with OneClick!"
+    "message": "Save Image with One Click!"
   },
   "dta_turbo_link": {
     "description": "Menu text",
-    "message": "Save Link with OneClick!"
+    "message": "Save Link with One Click!"
   },
   "dta_turbo_media": {
     "description": "Menu text",
-    "message": "Save Media with OneClick!"
+    "message": "Save Media with One Click!"
   },
   "dta_turbo_selection": {
     "description": "Menu text",
-    "message": "Save Selection with OneClick!"
+    "message": "Save Selection with One Click!"
   },
   "error_invalidMask": {
     "description": "Error message; single/select window",
@@ -348,7 +348,7 @@
     "message": "Export As Text"
   },
   "extensionDescription": {
-    "description": "GimmeThat! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one",
+    "description": "Gimme That! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one",
     "message": "The Mass Downloader for your browser"
   },
   "fastfilter_placeholder": {
@@ -483,7 +483,7 @@
   },
   "manager_title": {
     "description": "Window/tab title",
-    "message": "GimmeThat! Manager"
+    "message": "Gimme That! Manager"
   },
   "mask": {
     "description": "Renaming mask (short); used in e.g. select",
@@ -519,7 +519,7 @@
   },
   "nagging_message": {
     "description": "Donation nagging message; displayed as a notification bar in manager",
-    "message": "You've added $DOWNLOADS$ downloads with GimmeThat! so far! As a regular user you might want to consider a donation to support further development. Thanks!",
+    "message": "You've added $DOWNLOADS$ downloads with Gimme That! so far! As a regular user you might want to consider a donation to support further development. Thanks!",
     "placeholders": {
       "downloads": {
         "content": "$1",
@@ -591,11 +591,11 @@
   },
   "pref_button_type": {
     "description": "label",
-    "message": "GimmeThat! button:"
+    "message": "Gimme That! button:"
   },
   "pref_button_type_dta": {
     "description": "label",
-    "message": "GimmeThat! selection"
+    "message": "Gimme That! selection"
   },
   "pref_button_type_manager": {
     "description": "label",
@@ -607,7 +607,7 @@
   },
   "pref_button_type_turbo": {
     "description": "label",
-    "message": "OneClick!"
+    "message": "One Click!"
   },
   "pref_concurrent_downloads": {
     "description": "Preferences/Network",
@@ -703,7 +703,7 @@
   },
   "prefs_title": {
     "description": "Window/tab title; Manager",
-    "message": "GimmeThat! Manager"
+    "message": "Gimme That! Manager"
   },
   "queue_finished": {
     "description": "Notification text",
@@ -1059,7 +1059,7 @@
   },
   "select_title": {
     "description": "Title of the select window",
-    "message": "GimmeThat! - Select your Downloads"
+    "message": "Gimme That! - Select your Downloads"
   },
   "set_mask": {
     "description": "Menu text; select window",
@@ -1087,7 +1087,7 @@
   },
   "single_title": {
     "description": "Title of single window",
-    "message": "GimmeThat! - Add a link"
+    "message": "Gimme That! - Add a link"
   },
   "sizeB": {
     "description": "Size formatting; bytes",

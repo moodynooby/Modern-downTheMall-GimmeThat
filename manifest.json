@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "GimmeThat!",
-  "version": "5",
+  "name": "Gimme That!",
+  "version": "4.99",
 
   "description": "__MSG_extensionDescription__",
   "author": "Manas",
@@ -45,7 +45,7 @@
       "32": "style/icon32.png",
       "128": "style/icon128.png"
     },
-    "default_title": "GimmeThat!"
+    "default_title": "Gimme That!"
   },
 
   "options_ui": {

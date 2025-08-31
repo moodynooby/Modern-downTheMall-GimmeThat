@@ -102,7 +102,7 @@ export const MASK = new RecentList("mask", [
   "*name*.*ext*",
   "*num*_*name*.*ext*",
   "*url*-*name*.*ext*",
-  "gimmethat/*y*-*m*/*name*.*ext*",
+  "Gimme That!/*y*-*m*/*name*.*ext*",
   "*name* (*text*).*ext*"
 ]);
 MASK.init().catch(console.error);
@@ -119,6 +119,6 @@ FASTFILTER.init().catch(console.error);
 
 export const SUBFOLDER = new RecentList("subfolder", [
   "",
-  "GimmeThat",
+  "Gimme That!",
 ]);
 SUBFOLDER.init().catch(console.error);

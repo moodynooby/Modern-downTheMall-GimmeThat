@@ -1,80 +1,118 @@
-Licensed under the GPL-2.0 License.
+The extension can be rebranded and rewritten to better emphasize its **simplicity** and **minimal, hassle-free experience** while maintaining a modern, developer-focused appeal.
 
-## Release Notes
+***
 
-V2.6
-Aim to make the extension faster and leaner
+## Gimme That! ! – The Minimal Mass Downloader for Your Browser
 
-- Remove Locales as it was slowing down the extension and made them optional
-- Made the settings page more modern
-- Removed ToolTips And Custom Sounds to use native features
+### Description  
+A truly **minimalist**, fast, and hassle-free mass downloader for your browser. Designed to be lean, intuitive, and free of clutter, Gimme That! ! puts downloading in your hands—no distractions, just efficient downloading.
+
+***
+Gimme That! !’s philosophy: **Less is more. The core features you need, nothing you don’t.**  
+This approach ensures a **minimal, clean, and efficient** mass downloader.
+
+### Release Notes
+
+#### v2.6  
+With this update, Gimme That! ! becomes faster, lighter, and more focused on a seamless user experience.
+
+
+- Optional locales removed for greater speed and less bloat.
+- Settings page fully modernized for clarity and ease.
+- Native tooltips and sounds replace custom features, keeping things simplified and integrated.
+
+
+***
 
 ### Requirements
 
-- [node](https://nodejs.org/en/)
-- [yarn](https://yarnpkg.com/)
-- [python3](https://www.python.org/) >= 3.6 (to build zips)
-- [web-ext](https://www.npmjs.com/package/web-ext) (for development ease)
+- [node](https://nodejs.org/en/)  
+- [yarn](https://yarnpkg.com/)  
+- [python3](https://www.python.org/) ≥ 3.6 (for zip builds)  
+- [web-ext](https://www.npmjs.com/package/web-ext) (if developing in Firefox)  
+
+***
 
 ### Setup
 
-You will want to run `yarn` to install the development dependencies such as webpack first.
+Install dependencies first with:
+```bash
+yarn
+```
 
-### Making changes
+***
 
-Just use your favorite text editor to edit the files.
+### Making Changes
 
-You will want to run `yarn watch`.
-This will run the webpack bundler in watch mode, transpiling the TypeScript to Javascript and updating bundles as you change the source.
+Edit the files using any code editor. To watch for changes and re-bundle automatically, run:
+```bash
+yarn watch
+```
 
-Please note: You have to run `yarn watch` or `yarn build` (at least once) as it builds the actual script bundles.
+For a one-time build, use:
+```bash
+yarn build
+```
+
+***
 
 ### Running in Firefox
 
-I recommend you install the [`web-ext`](https://www.npmjs.com/package/web-ext) tools from mozilla. It is not listed as a dependency by design at it causes problems with dependency resolution in yarn right now if installed in the same location as the rest of the dependencies.
+Install `web-ext` separately (not as a dependency). Then, run:
+```bash
+yarn webext
+```
+This uses a separate Firefox profile in `../GT.p` and automatically reloads the extension upon changes.  
+For unsigned builds, run:
+```bash
+yarn build
+```
+Then install the generated zip into Firefox Nightly or Unbranded builds.
 
-If you did, then running `yarn webext` (additionally to `yarn watch`) will run the WebExtension in a development profile. This will use the directory `../GT.p` to keep a development profile. You might need to create this directory before you use this command. Furthermore `yarn webext` will watch for changes to the sources and automatically reload the extension.
+***
 
-Alternatively, you can also `yarn build`, which then builds an _unsigned_ zip that you can then install permanently in a browser that does not enforce signing (i.e. Nightly or the Unbranded Firefox with the right about:config preferences).
+### Running in Chrome/Chromium
 
-### Running in Chrome/Chromium/etc
+After building:
+- Enable Developer Mode in Extensions.
+- Use "Load Unpacked" to open your build directory.
 
-You have to build the bundles first, of course.
+***
 
-Then put your Chrome into Developement Mode on the Extensions page, and Load Unpacked the directory of your downthemall clone.
+### Making Release Zips
 
-### Making release zips
+Create unsigned zips for all browsers with:
+```bash
+yarn build
+```
+For official release mode:
+```bash
+python3 util/build.py --mode=release
+```
 
-To get a basic unofficial set of zips for Firefox and chrome, run `yarn build`.
+Outputs go in `web-ext-artifacts`.
 
-If you want to generate release builds like the ones that are eventually released in the extension stores, use `python3 util/build.py --mode=release`.
+- `-fx.zip`: Firefox  
+- `-crx.zip`: Chrome/Chromium  
+- `-opr.zip`: Opera  
 
-The output is located in `web-ext-artifacts`.
+***
 
-- `-fx.zip` are Firefox builds
-- `-crx.zip` are Chrome/Chromium builds
-- `-opr.zip` are Opera builds (essentially like the Chrome one, but without sounds)
+### Contribution Guidelines
 
-### The AMO Editors tl;dr guide
+- Run eslint before submitting patches.
+- Prefer typescript over javascript.
+- Ship only essential external dependencies.
+- Submit code as Pull Requests, rebased onto the latest `master`.
 
-1. Install the requirements.
-2. `yarn && python3 util/build.py --mode=release`
-3. Have a look in `web-ext-artifacts/dta-*-fx.zip`
+***
 
-### Patches
+### Code Structure
 
-Before submitting patches, please make sure you run eslint (if this isn't done automatically in your text editor/IDE), and eslint does not report any open issues. Code contributions should favor typescript code over javascript code. External dependencies that would ship with the final product (including all npm/yarn packages) should be kept to a bare minimum and need justification.
+- `uikit/` – Core UI components (e.g., VirtualTable, ContextMenu).
+- `lib/` – Backend routines and core logic.
+- `windows/` – All interactive HTML and scripts for the UI.
+- `style/` – CSS and images.
 
-Please submit your patches as Pull Requests, and rebase your commits onto the current `master` before submitting.
+***
 
-### Code structure
-
-The code base is comparatively large for a WebExtension, with over 11K sloc of typescript.
-It isn't as well organized as it should be in some places; hope you don't mind.
-
-- `uikit/` - The base User Interface Kit, which currently consists of
-  - the `VirtualTable` implementation, aka that interactive HTML table with columns, columns resizing and hiding, etc you see in the Manager, Select and Preferences windows/tabs
-  - the `ContextMenu` and related classes that drive the HTML-based context menus
-- `lib/` - The "backend stuff" and assorted library routines and classes.
-- `windows/` - The "frontend stuff" so all the HTML and corresponding code to make that HTML into something interactive
-- `style/` - CSS and images
